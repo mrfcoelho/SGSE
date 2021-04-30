@@ -3,6 +3,7 @@ import java.util.List;
 
 public class SGSE {
     //variaveis de instancia
+Avancado a = new Avancado();
 
     //variaveis de classe
 

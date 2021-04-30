@@ -128,6 +128,36 @@ public abstract class Jogador {
     }
 
     //metodos override
+    @Override
+    public boolean equals(Object o){
+        if(this == o) return true;
+        if(o==null || this.getClass() != o.getClass()) return false;
+        Jogador resultado = (Jogador)o;
+        return this.velocidade == resultado.getVelocidade() &&
+                this.resistencia == resultado.getResistencia() &&
+                this.destreza == resultado.getDestreza() &&
+                this.impulsao == resultado.getImpulsao() &&
+                this.jogoCabeca == resultado.getJogoCabeca() &&
+                this.remate == resultado.getRemate() &&
+                this.passe == resultado.getPasse() &&
+                this.titular == resultado.isTitular() &&
+                this.historial.equals(resultado.getHistorial());
+    }
+
+    @Override
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+        sb.append(this.velocidade)
+                .append(this.resistencia)
+                .append(this.destreza)
+                .append(this.impulsao)
+                .append(this.jogoCabeca)
+                .append(this.remate)
+                .append(this.passe)
+                .append(this.titular)
+                .append(this.historial);
+        return sb.toString();
+    }
 
     //metodos especificos
     public abstract double habilidade();

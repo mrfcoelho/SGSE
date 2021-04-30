@@ -24,6 +24,14 @@ public class Avancado extends Jogador{
 
     //metodos override
     @Override
+    public boolean equals(Object o){
+        if(this == o) return true;
+        if(o==null || this.getClass() != o.getClass()) return false;
+        Avancado resultado = (Avancado)o;
+        return this.equals(resultado);
+    }
+
+    @Override
     public Avancado clone(){
         return new Avancado(this);
     }

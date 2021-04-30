@@ -39,7 +39,30 @@ public class Equipa {
     }
 
     //metodos override
-    
+    @Override
+    public boolean equals(Object o){
+        if(this == o) return true;
+        if(o==null || this.getClass() != o.getClass()) return false;
+        Equipa resultado = (Equipa)o;
+        return this.jogadores.equals(((Equipa) o).getJogadores());
+    }
+
+    @Override
+    public String toString(){
+        StringBuilder sb = new StringBuilder();
+        for(Map.Entry<Integer,Jogador> e : this.jogadores.entrySet()){
+            sb.append(e.getKey().toString())
+                    .append(": ")
+                    .append(e.getValue().toString())
+                    .append("\n");
+        }
+        return sb.toString();
+    }
+
+    @Override
+    public Equipa clone(){
+        return new Equipa(this);
+    }
 
     //metodos especificos
     public double habilidade(){
