@@ -20,7 +20,7 @@ Avancado a = new Avancado();
      * @return jogador criado
      */
     public Jogador novoJogador(String tipo){
-        Jogador resultado;
+        Jogador resultado = null;
 
         switch (tipo){
             case "GuardaRedes":
