@@ -41,6 +41,8 @@ public class Medio extends Jogador{
         super (newMedio.getNome(), newMedio.getVelocidade(), newMedio.getResistencia(),
                 newMedio.getDestreza(), newMedio.getImpulsao(), newMedio.getJogoCabeca(), newMedio.getRemate(),
                 newMedio.getPasse(), newMedio.isTitular(), newMedio.getHistorial());
+
+        this.setNumero(newMedio.getNumero());
     }
     @Override
     /**

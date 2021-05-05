@@ -14,6 +14,7 @@ public class GuardaRedes extends Jogador {
      */
     public GuardaRedes() {
         super();
+        this.elasticidade = 0;
     }
 
     /**
@@ -27,6 +28,7 @@ public class GuardaRedes extends Jogador {
      * @param remate remate do guardaredes.
      * @param passe passe do guardaredes.
      * @param titular titular do guardaredes.
+     * @param elasticidade elasticidade do guardaredes.
      * @param historial historial do guardaredes.
      */
     public GuardaRedes (String nome, int velocidade, int resistencia, int destreza, int impulsao, int jogoCabeca,
@@ -45,6 +47,7 @@ public class GuardaRedes extends Jogador {
                 newgr.getDestreza(), newgr.getImpulsao(), newgr.getJogoCabeca(), newgr.getRemate(),
                 newgr.getPasse(), newgr.isTitular(), newgr.getHistorial());
         this.elasticidade = newgr.getElasticidade();
+        this.setNumero(newgr.getNumero());
     }
 
 
@@ -98,7 +101,7 @@ public class GuardaRedes extends Jogador {
     public String toString() {
 
         StringBuilder sb = new StringBuilder();
-        sb.append ("GuardaRedes: ").append(super.toString()).append("; Elastcidade: ").append(this.elasticidade);
+        sb.append ("GuardaRedes: ").append("Elasticidade: ").append(this.elasticidade).append("; ").append(super.toString());
 
         return sb.toString();
     }

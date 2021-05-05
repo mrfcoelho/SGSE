@@ -31,6 +31,7 @@ public class Lateral extends Jogador{
                    int remate, int passe, boolean titular, List<String> historial) {
         super(nome, velocidade, resistencia, destreza, impulsao, jogoCabeca,
                 remate, passe, titular, historial);
+
     }
 
     /**
@@ -41,6 +42,8 @@ public class Lateral extends Jogador{
         super (newLateral.getNome(), newLateral.getVelocidade(), newLateral.getResistencia(),
                 newLateral.getDestreza(), newLateral.getImpulsao(), newLateral.getJogoCabeca(), newLateral.getRemate(),
                 newLateral.getPasse(), newLateral.isTitular(), newLateral.getHistorial());
+
+        this.setNumero(newLateral.getNumero());
     }
 
     /**

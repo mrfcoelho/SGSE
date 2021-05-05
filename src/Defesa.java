@@ -41,6 +41,8 @@ public class Defesa extends Jogador{
         super (newDefesa.getNome(), newDefesa.getVelocidade(), newDefesa.getResistencia(),
                 newDefesa.getDestreza(), newDefesa.getImpulsao(), newDefesa.getJogoCabeca(), newDefesa.getRemate(),
                 newDefesa.getPasse(), newDefesa.isTitular(), newDefesa.getHistorial());
+
+        this.setNumero(newDefesa.getNumero());
     }
 
     @Override

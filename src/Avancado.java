@@ -43,6 +43,8 @@ public class Avancado extends Jogador{
         super(newAvancado.getNome(), newAvancado.getVelocidade(), newAvancado.getResistencia(), newAvancado.getDestreza(),
                 newAvancado.getImpulsao(), newAvancado.getJogoCabeca(), newAvancado.getRemate(),
                 newAvancado.getPasse(), newAvancado.isTitular(), newAvancado.getHistorial());
+
+        this.setNumero(newAvancado.getNumero());
     }
 
     @Override

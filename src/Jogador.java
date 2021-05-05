@@ -221,11 +221,9 @@ public abstract class Jogador {
      */
     public Jogador() {
 
-        this.nome = "";
-        this.numero = this.numJogadores++;
-
-        // incrementa o numero de jogadores ja criados.
         this.numJogadores++;
+        this.numero = this.numJogadores;
+        this.nome = "";
         this.velocidade = 0;
         this.resistencia = 0;
         this.destreza = 0;
@@ -253,10 +251,9 @@ public abstract class Jogador {
     public Jogador(String nome, int velocidade, int resistencia, int destreza, int impulsao, int jogoCabeca,
                    int remate, int passe, boolean titular, List<String> historial) {
 
-        this.numero = this.numJogadores++;
-
-        // incrementa o numero de jogadores ja criados.
         this.numJogadores++;
+
+        this.numero = this.numJogadores;
         this.nome = nome;
         this.velocidade = velocidade;
         this.resistencia = resistencia;
@@ -275,10 +272,8 @@ public abstract class Jogador {
      */
     public Jogador(Jogador jogador) {
 
-        this.numero = this.numJogadores++;
-
-        // incrementa o numero de jogadores ja criados.
         this.numJogadores++;
+        this.numero = this.numJogadores;
         this.nome = jogador.getNome();
         this.velocidade = jogador.getVelocidade();
         this.resistencia = jogador.getResistencia();
@@ -301,7 +296,7 @@ public abstract class Jogador {
         Jogador resultado = (Jogador) o;
         return this.nome.equals(resultado.getNome())&&
                 this.numero == resultado.getNumero() &&
-                velocidade == resultado.getVelocidade() &&
+                this.velocidade == resultado.getVelocidade() &&
                 this.resistencia == resultado.getResistencia() &&
                 this.destreza == resultado.getDestreza() &&
                 this.impulsao == resultado.getImpulsao() &&
@@ -319,7 +314,7 @@ public abstract class Jogador {
         StringBuilder sb = new StringBuilder();
 
         sb.append("Nome: ").append(this.nome)
-                .append("Numero: ").append(this.numero)
+                .append("; Numero: ").append(this.numero)
         .append("; Velocidade: ").append(this.velocidade)
                 .append("; Resistencia: ").append(this.resistencia)
                 .append("; Destreza: ").append(this.destreza)
