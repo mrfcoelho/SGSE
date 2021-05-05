@@ -332,4 +332,6 @@ public abstract class Jogador {
      * @return double com a habilidade de um jogador.
      */
     public abstract int habilidade();
+
+    public abstract Jogador clone();
 }
