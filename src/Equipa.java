@@ -1,13 +1,15 @@
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Classe que modela uma equipa.
+ * @author grupo21
+ * @version 1.0
+ */
 public class Equipa {
-    //variaveis de instancia
+
     private Map<Integer,Jogador> jogadores;
 
-    //variaveis de classe
-
-    //getters e setters
     public Map<Integer, Jogador> getJogadores() {
         Map<Integer,Jogador> resultado = new HashMap<>();
         for(Map.Entry<Integer,Jogador> e : jogadores.entrySet()){
