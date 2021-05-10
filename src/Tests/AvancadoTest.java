@@ -1,3 +1,7 @@
+package Tests;
+
+import Model.Avancado;
+import Model.Jogador;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -14,10 +18,10 @@ class AvancadoTest {
     @BeforeEach
     void setUp() {
 
-        ronaldo = new Avancado("Cristiano Ronaldo", 91, 90, 89, 87, 94, 96, 84, true,
+        ronaldo = new Avancado("Cristiano Ronaldo", 9, 91, 90, 89, 87, 94, 96, 84, Jogador.Estado.SUPLENTE,
                 new ArrayList<>(Arrays.asList("Sporting", "Manchester United", "Real Madrid", "Juventus")));
 
-        messi = new Avancado("Lionel Messi", 91, 84 , 85, 87, 77, 94, 90, true,
+        messi = new Avancado("Lionel Messi", 11, 91, 84 , 85, 87, 77, 94, 90, Jogador.Estado.TITULAR,
                 new ArrayList<>(Arrays.asList("Barcelona")));
     }
 

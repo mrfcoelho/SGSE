@@ -1,3 +1,7 @@
+package Tests;
+
+import Model.Defesa;
+import Model.Jogador;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -14,10 +18,10 @@ class DefesaTest {
     @BeforeEach
     void setUp() {
 
-        to = new Defesa("To", 91, 90, 89, 87, 94, 96, 84, true,
+        to = new Defesa("To", 2, 91, 90, 89, 87, 94, 96, 84, Jogador.Estado.ENTRANDO,
                 new ArrayList<>(Arrays.asList("Sporting", "Manchester United", "Real Madrid", "Juventus")));
 
-        ze = new Defesa("Ze", 91, 84 , 85, 87, 77, 94, 90, true,
+        ze = new Defesa("Ze", 3, 91, 84 , 85, 87, 77, 94, 90, Jogador.Estado.SAINDO,
                 new ArrayList<>(Arrays.asList("Barcelona")));
     }
     @Test

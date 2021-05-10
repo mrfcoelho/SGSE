@@ -1,3 +1,9 @@
+package Tests;
+
+import Model.Avancado;
+import Model.Defesa;
+import Model.Equipa;
+import Model.Jogador;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -19,22 +25,22 @@ class EquipaTest {
     void setUp() {
 
         madrid = new Equipa("Real Madrid", new HashMap<Integer, Jogador>());
-        to = new Defesa("To", 91, 90, 89, 87, 94, 96, 84, true,
+        to = new Defesa("To", 3, 91, 90, 89, 87, 94, 96, 84, Jogador.Estado.ENTRANDO,
                 new ArrayList<>(Arrays.asList("Sporting", "Manchester United", "Real Madrid", "Juventus")));
 
-        ze = new Defesa("Ze", 91, 84 , 85, 87, 77, 94, 90, true,
+        ze = new Defesa("Ze", 2, 91, 84 , 85, 87, 77, 94, 90, Jogador.Estado.TITULAR,
                 new ArrayList<>(Arrays.asList("Barcelona")));
-        madrid.adicionaJogador(to);
-        madrid.adicionaJogador(ze);
+        madrid.insereJogador(to);
+        madrid.insereJogador(ze);
 
-        ronaldo = new Avancado("Cristiano Ronaldo", 91, 90, 89, 87, 94, 96, 84, true,
+        ronaldo = new Avancado("Cristiano Ronaldo", 9, 91, 90, 89, 87, 94, 96, 84, Jogador.Estado.SUPLENTE,
                 new ArrayList<>(Arrays.asList("Sporting", "Manchester United", "Real Madrid", "Juventus")));
 
-        messi = new Avancado("Lionel Messi", 91, 84 , 85, 87, 77, 94, 90, true,
+        messi = new Avancado("Lionel Messi", 11, 91, 84 , 85, 87, 77, 94, 90, Jogador.Estado.TITULAR,
                 new ArrayList<>(Arrays.asList("Barcelona")));
 
-        madrid.adicionaJogador(ronaldo);
-        madrid.adicionaJogador(messi);
+        madrid.insereJogador(ronaldo);
+        madrid.insereJogador(messi);
     }
 
     @Test
@@ -45,7 +51,7 @@ class EquipaTest {
     @Test
     void setJogadores() {
         madrid.setJogadores(new HashMap<>());
-        madrid.adicionaJogador(to);
+        madrid.insereJogador(to);
         System.out.println(madrid);
 
     }

@@ -1,3 +1,6 @@
+package Model;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -7,68 +10,48 @@ import java.util.Map;
  * @version 1.0
  */
 public class Equipa {
-
-    private static int numEquipas; // numero de equipas que foram criadas.
+    //variaveis de instancia
     private String nome;
-    private int numero;
     private Map<Integer,Jogador> jogadores;
+
+    //variaveis de class
 
     /**
      * Construtor vazio para a classe Equipa.
      */
     public Equipa(){
-        this.numEquipas++;
-        this.numero = numEquipas;
         this.nome = "";
         this.jogadores = new HashMap<>();
     }
 
     /**
-     * Construtor parametrizado para a classe Equipa.
+     * Construtor parametrizado para a classe Model.Equipa.
      * @param nome nome da equipa.
      * @param jogadores jogadores da equipa.
      */
     public Equipa (String nome, Map<Integer, Jogador> jogadores) {
-        this.numEquipas++;
-        this.numero = numEquipas;
         this.nome = nome;
         this.jogadores = new HashMap<>();
 
         for (Jogador j: jogadores.values()) {
 
-            this.jogadores.put(j.getNumero(), j.clone());
+            this.jogadores.put(j.getId(), j.clone());
         }
 
     }
 
     /**
-     * Construto copia para a classe Equipa.
-     * @param newEquipa uma instancia da classe Equipa.
+     * Construto copia para a classe Model.Equipa.
+     * @param newEquipa uma instancia da classe Model.Equipa.
      */
     public Equipa (Equipa newEquipa){
         this.nome = newEquipa.getNome();
-        this.numero = newEquipa.getNumero();
-        this.setJogadores(newEquipa.getJogadores());
+        this.jogadores = newEquipa.getJogadores();
     }
 
+    //getters e setters
     /**
-     * Metodo getter para a variavel de instancia numEquipas da classe Equipa.
-     * @return int com o valor do numero de equipas ja criadas.
-     */
-    public static int getNumEquipas() {
-        return numEquipas;
-    }
-
-    /**
-     * Metodo setter para a variavel de instancia numEquipas da classe Equipa.
-     * @param numEquipas int com o numero de equipas ja criadas.
-     */
-    public static void setNumEquipas(int numEquipas) {
-        Equipa.numEquipas = numEquipas;
-    }
-
-    /**
-     * Metodo getter para a variavel de instancia nome da classe Equipa.
+     * Metodo getter para a variavel de instancia nome da classe Model.Equipa.
      * @return String com o nome da equipa.
      */
     public String getNome() {
@@ -76,7 +59,7 @@ public class Equipa {
     }
 
     /**
-     * Metodo setter para a variavel de instancia nome da classe Equipa.
+     * Metodo setter para a variavel de instancia nome da classe Model.Equipa.
      * @param nome String com o nome da equipa.
      */
     public void setNome(String nome) {
@@ -84,56 +67,38 @@ public class Equipa {
     }
 
     /**
-     * Metodo getter para a variavel de instancia numero da classe Equipa.
-     * @return numero da equipa.
-     */
-    public int getNumero() {
-        return numero;
-    }
-
-    /**
-     * Metodo getter para a variavel de instancia numero da classe Equipa.
-     * @param numero numero de uma equipa.
-     */
-    public void setNumero(int numero) {
-        this.numero = numero;
-    }
-
-    /**
-     * Metodo getter para a variavel de instancia jogadores da classe Equipa.
+     * Metodo getter para a variavel de instancia jogadores da classe Model.Equipa.
      * @return map com os jogadores de uma equipa.
      */
     public Map<Integer, Jogador> getJogadores() {
         Map<Integer,Jogador> resultado = new HashMap<>();
         for(Map.Entry<Integer,Jogador> e : jogadores.entrySet()){
-            resultado.put(e.getKey(),e.getValue());
-            //todo ver clone!
+            resultado.put(e.getKey(),e.getValue().clone());
         }
         return resultado;
     }
 
     /**
-     * Metodo setter para a variavel jogadores da classe Equipa.
+     * Metodo setter para a variavel jogadores da classe Model.Equipa.
      * @param newJogadores map com os jogadores de uma equipa.
      */
     public void setJogadores(Map<Integer,Jogador> newJogadores){
         this.jogadores = new HashMap<>();
         for(Map.Entry<Integer,Jogador> e : newJogadores.entrySet()){
-            this.jogadores.put(e.getKey(),e.getValue());
-            //todo ver clone!
+            this.jogadores.put(e.getKey(),e.getValue().clone());
         }
     }
 
     @Override
     /**
-     * Metodo equals para a classe Equipa.
+     * Metodo equals para a classe Model.Equipa.
      */
     public boolean equals(Object o){
         if(this == o) return true;
         if(o==null || this.getClass() != o.getClass()) return false;
         Equipa resultado = (Equipa)o;
         return this.nome.equals(resultado.getNome()) &&
-                this.numero == resultado.getNumero();
+                this.jogadores.equals(resultado.getJogadores());
     }
 
     @Override
@@ -142,14 +107,17 @@ public class Equipa {
      */
     public String toString(){
         StringBuilder sb = new StringBuilder();
-        sb.append("Nome: ").append(this.nome).
-                append(";Jogadores: ").append(this.nome).append(this.jogadores.values());
+        sb.append("Equipa:").append(this.nome).append("\n");
+        for(Map.Entry<Integer,Jogador> e : this.jogadores.entrySet()){
+            sb.append(e.getValue().toString()).append("\n");
+        }
+
         return sb.toString();
     }
 
     @Override
     /**
-     * Metodo clone para a classe Equipa.
+     * Metodo clone para a classe Model.Equipa.
      */
     public Equipa clone(){
         return new Equipa(this);
@@ -167,9 +135,15 @@ public class Equipa {
      * Metodo que adiciona um jogador a uma equipa.
      * @param j um jogador a adicionar a equipa.
      */
-    public void adicionaJogador(Jogador j) {
+    public void insereJogador(Jogador j) {
 
-        this.jogadores.put(j.getNumero(), j.clone());
+        this.jogadores.put(j.getId(), j.clone());
 
+    }
+
+    public static Equipa parse(String input){
+        String[] campos = input.split(",");
+        return new Equipa(campos[0],
+                new HashMap<>());
     }
 }

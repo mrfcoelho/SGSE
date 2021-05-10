@@ -1,86 +1,53 @@
-import java.util.ArrayList;
-import java.util.List;
+import Control.*;
+import Model.*;
+import View.*;
 
 public class SGSE {
+    public static void main(String[] args) {
+        //inicializa as interfaces do MVC
+        IModel model = new Model();
+        IView view = new View();
+        IControl control = new Control();
+
+        //inicializa o control
+        control.setModel(model);
+        control.setView(view);
+        control.start();
+
+        //termina o programa
+        System.exit(0);
+    }
+}
+
+//estrutura tipo de uma classe a adotar!
+
     //variaveis de instancia
-Avancado a = new Avancado();
 
     //variaveis de classe
 
     //construtor
+        //vazio
+
+        //parametrico
+
+        //copia
 
     //getters e setters
 
     //metodos override
 
+    //metodos abstract
+
     //metodos especificos
 
-    /**
-     * Criar um novo jogador
-     * @return jogador criado
-     */
-    public Jogador novoJogador(String tipo){
-        Jogador resultado = null;
 
-        switch (tipo){
-            case "GuardaRedes":
-                resultado = new GuardaRedes();
-                break;
-            case "Defesa":
-                resultado = new Defesa();
-                break;
-            case "Lateral":
-                resultado = new Lateral();
-                break;
-            case "Medio":
-                resultado = new Medio();
-                break;
-            case "Avancado":
-                resultado = new Avancado();
-                break;
-            default:
-                break;
-        }
-        return resultado;
-    }
 
-    /**
-     * Cria uma nova equipa
-     * @return equipa criada
-     */
-    public Equipa novaEquipa(){
-        Equipa resultado = new Equipa();
-        return resultado;
-    }
+//estrutura tipo de uma interface  a adotar!
 
-    /**
-     * Associa um jogador a uma equipa
-     */
-    public void associarJogador(){};
+    //metodos abstratos
 
-    /**
-     * Devolve lista com informação do jogador
-     * @return lista com informação
-     */
-    public List<String> consultarJogador(){
-        ArrayList<String> resultado = new ArrayList<>();
-        return resultado;
-    }
+    //constantes
 
-    /**
-     * Devolve lista com informação da equipa
-     * @return lista com informação
-     */
-    public List<String> consultarEquipa(){
-        ArrayList<String> resultado = new ArrayList<>();
-        return resultado;
-    }
+    //metodos concretos (default methods)
 
-    /**
-     * Cria novo jogo
-     */
-    public Jogo novoJogo(){
-        Jogo resultado = new Jogo();
-        return resultado;
-    }
-}
+    //metodos concretos de class (static methods)

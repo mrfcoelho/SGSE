@@ -1,3 +1,5 @@
+package Model;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,11 +9,10 @@ import java.util.List;
  * @version 1.0
  */
 public abstract class Jogador {
-
-    private static int numJogadores; // numero de jogadores qe ja foram criados.
-
+    //variaveis de instancia
+    private int id;
     private String nome;
-    private int numero;
+    private int numeroCamisola;
     private int velocidade;
     private int resistencia;
     private int destreza;
@@ -19,59 +20,46 @@ public abstract class Jogador {
     private int jogoCabeca;
     private int remate;
     private int passe;
-    private boolean titular;
+    private Estado estado;
     private List<String> historial;
 
-    /**
-     * Metodo getter para a variavel de instancia nome da classe Jogador.
-     * @return String com o nome de um jogador.
-     */
-    public String getNome() {
-        return nome;
+    //variaveis de class
+    private static int numJogadores; // numero de jogadores qe ja foram criados.
+
+    public static enum Estado{
+        SUPLENTE, TITULAR, SAINDO, ENTRANDO
     }
 
     /**
      * Metodo getter para a variavel numJogadores.
-     * @return int com o numero de jogadores que ja foram criados.
+     * @return int com o total de jogadores que ja foram criados.
      */
     public static int getNumJogadores() {
         return numJogadores;
     }
 
     /**
-     * Metodo setter para a variavel de instancia numJogadores.
-     * @param numJogadores int com o numero de jogadores que ja foram criados.
+     * Metodo getter para a variavel id para a classe Model.Jogador.
+     * @return id numero do jogador.
      */
-    public static void setNumJogadores(int numJogadores) {
-        Jogador.numJogadores = numJogadores;
+    public int getId() {
+        return id;
     }
 
     /**
-     * Metodo getter para a variavel numero para a classe Jogador.
-     * @return numero numero do jogador.
+     * Metodo getter para a variavel de instancia nome da classe Model.Jogador.
+     * @return String com o nome de um jogador.
      */
-    public int getNumero() {
-        return numero;
+    public String getNome() {
+        return nome;
+    }
+
+    public int getNumeroCamisola() {
+        return numeroCamisola;
     }
 
     /**
-     * Metodo setter para a variavel numero para a classe Jogador.
-     * @param numero numero do jogador.
-     */
-    public void setNumero(int numero) {
-        this.numero = numero;
-    }
-
-    /**
-     * Metodo setter para a variavel de instancia nome da classe Jogador.
-     * @param nome String com o nome de um jogador.
-     */
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    /**
-     * Metodo getter para a variavel de instancia velocidade da classe Jogador.
+     * Metodo getter para a variavel de instancia velocidade da classe Model.Jogador.
      * @return int com a velocidade de um jogador.
      */
     public int getVelocidade() {
@@ -80,7 +68,7 @@ public abstract class Jogador {
     }
 
     /**
-     * Metodo getter para a variavel de instancia resistencia da classe Jogador.
+     * Metodo getter para a variavel de instancia resistencia da classe Model.Jogador.
      * @return int com a resistencia de um jogador.
      */
     public int getResistencia() {
@@ -88,7 +76,7 @@ public abstract class Jogador {
     }
 
     /**
-     * Metodo getter para a variavel de instancia destreza da classe Jogador.
+     * Metodo getter para a variavel de instancia destreza da classe Model.Jogador.
      * @return int com a destreza de um jogador.
      */
     public int getDestreza() {
@@ -96,7 +84,7 @@ public abstract class Jogador {
     }
 
     /**
-     * Metodo getter para a variavel de instancia impulsao da classe Jogador.
+     * Metodo getter para a variavel de instancia impulsao da classe Model.Jogador.
      * @return int com a impulsao de um jogador.
      */
     public int getImpulsao() {
@@ -104,7 +92,7 @@ public abstract class Jogador {
     }
 
     /**
-     * Metodo getter para a variavel de instancia jogoCabeca da classe Jogador.
+     * Metodo getter para a variavel de instancia jogoCabeca da classe Model.Jogador.
      * @return int com o jogoCabeca de um jogador.
      */
     public int getJogoCabeca() {
@@ -112,7 +100,7 @@ public abstract class Jogador {
     }
 
     /**
-     * Metodo getter para a variavel de instancia remate para a classe Jogador.
+     * Metodo getter para a variavel de instancia remate para a classe Model.Jogador.
      * @return int com o remate de um jogador.
      */
     public int getRemate() {
@@ -120,7 +108,7 @@ public abstract class Jogador {
     }
 
     /**
-     * Metodo getter para a variavel passe da classe Jogador.
+     * Metodo getter para a variavel passe da classe Model.Jogador.
      * @return int com o valor de passe de um jogador.
      */
     public int getPasse() {
@@ -128,15 +116,15 @@ public abstract class Jogador {
     }
 
     /**
-     * Metodo getter para a variavel de instancia titular da classe Jogador.
+     * Metodo getter para a variavel de instancia titular da classe Model.Jogador.
      * @return booleano com o valor de titular de um jogador.
      */
-    public boolean isTitular() {
-        return titular;
+    public Estado getEstado() {
+        return estado;
     }
 
     /**
-     * Metodo getter para a variavel de instancia historial para a classe Jogador.
+     * Metodo getter para a variavel de instancia historial para a classe Model.Jogador.
      * @return Lista com as equipas em que o jogador jogou.
      */
     public List<String> getHistorial() {
@@ -145,7 +133,19 @@ public abstract class Jogador {
     }
 
     /**
-     * Metodo setter para a variavel de instancia velocidade para a classe Jogador.
+     * Metodo setter para a variavel de instancia nome da classe Model.Jogador.
+     * @param nome String com o nome de um jogador.
+     */
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setNumeroCamisola(int numeroCamisola) {
+        this.numeroCamisola = numeroCamisola;
+    }
+
+    /**
+     * Metodo setter para a variavel de instancia velocidade para a classe Model.Jogador.
      * @param velocidade velocidade de um jogador.
      */
     public void setVelocidade(int velocidade) {
@@ -153,7 +153,7 @@ public abstract class Jogador {
     }
 
     /**
-     * Metodo setter para variavel de instancia resistencia para a classe Jogador.
+     * Metodo setter para variavel de instancia resistencia para a classe Model.Jogador.
      * @param resistencia resistencia de um jogador.
      */
     public void setResistencia(int resistencia) {
@@ -169,7 +169,7 @@ public abstract class Jogador {
     }
 
     /**
-     * Metodo setter para a variavel de instancia impulsao da classe Jogador.
+     * Metodo setter para a variavel de instancia impulsao da classe Model.Jogador.
      * @param impulsao impulsao de um jogador.
      */
     public void setImpulsao(int impulsao) {
@@ -177,7 +177,7 @@ public abstract class Jogador {
     }
 
     /**
-     * Metodo setter para a variavel de instancia jogoCabeca da classe Jogador.
+     * Metodo setter para a variavel de instancia jogoCabeca da classe Model.Jogador.
      * @param jogoCabeca jogoCabeca de um jogador.
      */
     public void setJogoCabeca(int jogoCabeca) {
@@ -185,7 +185,7 @@ public abstract class Jogador {
     }
 
     /**
-     * Metodo setter para a variavel de instancia remate da classe Jogador.
+     * Metodo setter para a variavel de instancia remate da classe Model.Jogador.
      * @param remate remate de um jogador.
      */
     public void setRemate(int remate) {
@@ -193,7 +193,7 @@ public abstract class Jogador {
     }
 
     /**
-     * Metodo setter para a variavel de instancia passe da classe Jogador.
+     * Metodo setter para a variavel de instancia passe da classe Model.Jogador.
      * @param passe passe de um jogador.
      */
     public void setPasse(int passe) {
@@ -201,15 +201,15 @@ public abstract class Jogador {
     }
 
     /**
-     * Metodo setter para a variavel de instancia titular da classe Jogador.
-     * @param titular titular de um jogador.
+     * Metodo setter para a variavel de instancia titular da classe Model.Jogador.
+     * @param novoEstado titular de um jogador.
      */
-    public void setTitular(boolean titular) {
-        this.titular = titular;
+    public void setEstado(Estado novoEstado) {
+        this.estado = novoEstado;
     }
 
     /**
-     * Metodo setter para a variavel de instancia historial da classe Jogador.
+     * Metodo setter para a variavel de instancia historial da classe Model.Jogador.
      * @param historial lista com as equipas onde o jogador jogou.
      */
     public void setHistorial(List<String> historial) {
@@ -217,13 +217,13 @@ public abstract class Jogador {
     }
 
     /**
-     * Construtor vazio para a classe Jogador.
+     * Construtor vazio para a classe Model.Jogador.
      */
     public Jogador() {
-
-        this.numJogadores++;
-        this.numero = this.numJogadores;
+        numJogadores++;
+        this.id = numJogadores;
         this.nome = "";
+        this.numeroCamisola = 0;
         this.velocidade = 0;
         this.resistencia = 0;
         this.destreza = 0;
@@ -231,12 +231,12 @@ public abstract class Jogador {
         this.jogoCabeca = 0;
         this.remate = 0;
         this.passe = 0;
-        this.titular = false;
+        this.estado = Estado.SUPLENTE;
         this.historial = new ArrayList<>();
     }
 
     /**
-     * Construtor parametrizado para a classe Jogador.
+     * Construtor parametrizado para a classe Model.Jogador.
      * @param nome nome de um jogador.
      * @param velocidade velocidade de um jogador.
      * @param resistencia resistencia de um jogador.
@@ -245,16 +245,16 @@ public abstract class Jogador {
      * @param jogoCabeca jogo de cabeca de um jogador.
      * @param remate remate de um jogador.
      * @param passe passe de um jogador.
-     * @param titular titular de um jogador.
+     * @param estado de um jogador.
      * @param historial historial de um jogador.
      */
-    public Jogador(String nome, int velocidade, int resistencia, int destreza, int impulsao, int jogoCabeca,
-                   int remate, int passe, boolean titular, List<String> historial) {
-
-        this.numJogadores++;
-
-        this.numero = this.numJogadores;
+    public Jogador(String nome, int numeroCamisola, int velocidade, int resistencia, int destreza,
+                   int impulsao, int jogoCabeca, int remate, int passe, Estado estado,
+                   List<String> historial) {
+        numJogadores++;
+        this.id = numJogadores;
         this.nome = nome;
+        this.numeroCamisola = numeroCamisola;
         this.velocidade = velocidade;
         this.resistencia = resistencia;
         this.destreza = destreza;
@@ -262,19 +262,18 @@ public abstract class Jogador {
         this.jogoCabeca = jogoCabeca;
         this.remate = remate;
         this.passe = passe;
-        this.titular = titular;
+        this.estado = estado;
         this.historial = new ArrayList<>(historial);
     }
 
     /**
-     * Construtor copia para a classe Jogador.
-     * @param jogador instancia da classe Jogador.
+     * Construtor copia para a classe Model.Jogador.
+     * @param jogador instancia da classe Model.Jogador.
      */
     public Jogador(Jogador jogador) {
-
-        this.numJogadores++;
-        this.numero = this.numJogadores;
+        this.id = jogador.getId();
         this.nome = jogador.getNome();
+        this.numeroCamisola = jogador.getNumeroCamisola();
         this.velocidade = jogador.getVelocidade();
         this.resistencia = jogador.getResistencia();
         this.destreza = jogador.getDestreza();
@@ -282,20 +281,23 @@ public abstract class Jogador {
         this.jogoCabeca = jogador.getJogoCabeca();
         this.remate = jogador.getRemate();
         this.passe = jogador.getPasse();
-        this.titular = jogador.isTitular();
+        this.estado = jogador.getEstado();
         this.historial = jogador.getHistorial();
     }
 
+    //metodos override
+
     @Override
     /**
-     * Metodo equals para a classe Jogador.
+     * Metodo equals para a classe Model.Jogador.
      */
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || this.getClass() != o.getClass()) return false;
         Jogador resultado = (Jogador) o;
-        return this.nome.equals(resultado.getNome())&&
-                this.numero == resultado.getNumero() &&
+        return this.id == resultado.getId() &&
+                this.nome.equals(resultado.getNome()) &&
+                this.numeroCamisola == resultado.getNumeroCamisola() &&
                 this.velocidade == resultado.getVelocidade() &&
                 this.resistencia == resultado.getResistencia() &&
                 this.destreza == resultado.getDestreza() &&
@@ -303,7 +305,7 @@ public abstract class Jogador {
                 this.jogoCabeca == resultado.getJogoCabeca() &&
                 this.remate == resultado.getRemate() &&
                 this.passe == resultado.getPasse() &&
-                this.titular == resultado.isTitular();
+                this.estado.equals(resultado.getEstado());
     }
 
     @Override
@@ -313,17 +315,15 @@ public abstract class Jogador {
     public String toString() {
         StringBuilder sb = new StringBuilder();
 
-        sb.append("Nome: ").append(this.nome)
-                .append("; Numero: ").append(this.numero)
-        .append("; Velocidade: ").append(this.velocidade)
-                .append("; Resistencia: ").append(this.resistencia)
-                .append("; Destreza: ").append(this.destreza)
-                .append("; Impulsao: ").append(this.impulsao)
-                .append("; JogoCabeca: ").append(this.jogoCabeca)
-                .append("; Remate: ").append(this.remate)
-                .append("; Passe: ").append(this.passe)
-                .append("; Titular: ").append(this.titular)
-                .append("; Historial: ").append(this.historial);
+        sb.append(this.nome).append(",")
+                .append(this.numeroCamisola).append(",")
+                .append(this.velocidade).append(",")
+                .append(this.resistencia).append(",")
+                .append(this.destreza).append(",")
+                .append(this.impulsao).append(",")
+                .append(this.jogoCabeca).append(",")
+                .append(this.remate).append(",")
+                .append(this.passe).append(",");
         return sb.toString();
     }
 
@@ -334,4 +334,8 @@ public abstract class Jogador {
     public abstract int habilidade();
 
     public abstract Jogador clone();
+
+    public static Jogador parse(String input) {
+        return null;
+    }
 }

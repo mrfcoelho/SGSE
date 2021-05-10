@@ -1,3 +1,6 @@
+package Model;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -6,11 +9,11 @@ import java.util.List;
  * @version 1.0
  */
 public class GuardaRedes extends Jogador {
-
+    //variaveis de instancia
     private int elasticidade;
 
     /**
-     * Construtor vazio para a classe GuardaRedes.
+     * Construtor vazio para a classe Model.GuardaRedes.
      */
     public GuardaRedes() {
         super();
@@ -18,7 +21,7 @@ public class GuardaRedes extends Jogador {
     }
 
     /**
-     * Construtor parametrizado para a classe GuardaRedes.
+     * Construtor parametrizado para a classe Model.GuardaRedes.
      * @param nome nome do guardaredes.
      * @param velocidade velocidade do guardaredes.
      * @param resistencia resistencia do guardaredes.
@@ -27,14 +30,15 @@ public class GuardaRedes extends Jogador {
      * @param jogoCabeca jogo de cabeca do guardaredes.
      * @param remate remate do guardaredes.
      * @param passe passe do guardaredes.
-     * @param titular titular do guardaredes.
+     * @param estado do guardaredes.
      * @param elasticidade elasticidade do guardaredes.
      * @param historial historial do guardaredes.
      */
-    public GuardaRedes (String nome, int velocidade, int resistencia, int destreza, int impulsao, int jogoCabeca,
-                    int remate, int passe, boolean titular, int elasticidade, List<String> historial) {
-        super(nome, velocidade, resistencia, destreza, impulsao, jogoCabeca,
-                remate, passe, titular, historial);
+    public GuardaRedes (String nome, int numeroCamisola, int velocidade, int resistencia, int destreza,
+                        int impulsao, int jogoCabeca, int remate, int passe, Estado estado,
+                        int elasticidade, List<String> historial) {
+        super(nome, numeroCamisola, velocidade, resistencia, destreza, impulsao, jogoCabeca,
+                remate, passe, estado, historial);
         this.elasticidade = elasticidade;
     }
 
@@ -43,13 +47,9 @@ public class GuardaRedes extends Jogador {
      * @param newgr instancia de um guardaredes.
      */
     public GuardaRedes (GuardaRedes newgr) {
-        super (newgr.getNome(), newgr.getVelocidade(), newgr.getResistencia(),
-                newgr.getDestreza(), newgr.getImpulsao(), newgr.getJogoCabeca(), newgr.getRemate(),
-                newgr.getPasse(), newgr.isTitular(), newgr.getHistorial());
+        super (newgr);
         this.elasticidade = newgr.getElasticidade();
-        this.setNumero(newgr.getNumero());
     }
-
 
     /**
      * Metodo getter para a variavel de instancia elasticidade de um guardaredes.
@@ -67,17 +67,9 @@ public class GuardaRedes extends Jogador {
         this.elasticidade = elasticidade;
     }
 
-    /**
-     * Metodo que determina a habilidade de um guardaredes consoante os seus atributos.
-     * @return int com a habilidade de um guardaredes.
-     */
-    public int habilidade(){
-        int resultado = 0;
-        return resultado;
-    }
     @Override
     /**
-     * Metodo equals para a classe GuardaRedes.
+     * Metodo equals para a classe Model.GuardaRedes.
      */
     public boolean equals(Object o){
         if(this == o) return true;
@@ -88,7 +80,7 @@ public class GuardaRedes extends Jogador {
 
     @Override
     /**
-     * Metodo que permite clonar um GuardaRedes.
+     * Metodo que permite clonar um Model.GuardaRedes.
      */
     public GuardaRedes clone () {
         return new GuardaRedes(this);
@@ -99,10 +91,37 @@ public class GuardaRedes extends Jogador {
      * Metodo toString para a classe GuardaRedes.
      */
     public String toString() {
-
         StringBuilder sb = new StringBuilder();
-        sb.append ("GuardaRedes: ").append("Elasticidade: ").append(this.elasticidade).append("; ").append(super.toString());
-
+        sb.append ("Guarda-Redes:")
+                .append(super.toString())
+                .append(this.elasticidade);
         return sb.toString();
+    }
+
+    //Metodos Abstract
+
+    /**
+     * Metodo que determina a habilidade de um guardaredes consoante os seus atributos.
+     * @return int com a habilidade de um guardaredes.
+     */
+    public int habilidade(){
+        int resultado = 0;
+        return resultado;
+    }
+
+    public static GuardaRedes parse(String input){
+        String[] campos = input.split(",");
+        return new GuardaRedes(campos[0],
+                Integer.parseInt(campos[1]),
+                Integer.parseInt(campos[2]),
+                Integer.parseInt(campos[3]),
+                Integer.parseInt(campos[4]),
+                Integer.parseInt(campos[5]),
+                Integer.parseInt(campos[6]),
+                Integer.parseInt(campos[7]),
+                Integer.parseInt(campos[8]),
+                Estado.SUPLENTE,
+                Integer.parseInt(campos[9]),
+                new ArrayList<>());
     }
 }
