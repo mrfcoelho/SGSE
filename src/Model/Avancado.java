@@ -4,22 +4,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Classe que modela um avancado.
+ * Classe Avancado.
+ * É subclasse da classe abstracta Jogador.
  * @author grupo21
  * @version 1.0
  */
 public class Avancado extends Jogador{
 
     /**
-     * Construtor vazio para a classe Model.Avancado.
+     * Construtor vazio para a classe Avancado.
      */
     public Avancado(){
         super();
     }
 
     /**
-     * Construtor parametrizado para a classe Model.Avancado.
+     * Construtor parametrizado para a classe Avancado.
      * @param nome nome do avancado.
+     * @param numeroCamisola numero da camisola do avancado.
      * @param velocidade velocidade do avancado.
      * @param resistencia resistencia do avancado.
      * @param destreza destreza do avancado.
@@ -27,8 +29,8 @@ public class Avancado extends Jogador{
      * @param jogoCabeca jogo de cabeca do avancado.
      * @param remate remate do avancado.
      * @param passe passe do avancado.
-     * @param estado de um avancado.
-     * @param historial lista com as equipas onde o avancado jogou.
+     * @param estado estado de um avancado. (titular, suplente, entra ou sai)
+     * @param historial lista como nome das equipas onde o avancado jogou.
      */
     public Avancado(String nome, int numeroCamisola, int velocidade, int resistencia, int destreza,
                     int impulsao, int jogoCabeca, int remate, int passe, Estado estado,
@@ -38,8 +40,8 @@ public class Avancado extends Jogador{
     }
 
     /**
-     * Construtor copia para a classe Model.Avancado.
-     * @param newAvancado instancia de um avancado.
+     * Construtor copia para a classe Avancado.
+     * @param newAvancado um avancado.
      */
     public Avancado(Avancado newAvancado){
         super(newAvancado);
@@ -49,7 +51,7 @@ public class Avancado extends Jogador{
 
     @Override
     /**
-     * Metodo equals para a classe Model.Avancado.
+     * Metodo equals para a classe Avancado.
      */
     public boolean equals(Object o){
         if(this == o) return true;
@@ -60,7 +62,7 @@ public class Avancado extends Jogador{
 
     @Override
     /**
-     * Metodo que permite clonar um Model.Avancado.
+     * Metodo que permite clonar um avancado.
      */
     public Avancado clone(){
         return new Avancado(this);
@@ -68,7 +70,7 @@ public class Avancado extends Jogador{
 
     @Override
     /**
-     * Metodo toString para a classe Model.Avancado.
+     * Metodo toString para a classe Avancado.
      */
     public String toString() {
 
@@ -81,7 +83,7 @@ public class Avancado extends Jogador{
     //metodos abstract
 
     /**
-     * Metodo que determina a habilidade de um Model.Avancado.
+     * Metodo que determina a habilidade de um avancado.
      * A habilidade e calculada através dos seus atributos.
      * @return int com o valor da habilidade de um avancado.
      */
@@ -91,6 +93,11 @@ public class Avancado extends Jogador{
                 0.05*this.getPasse());
     }
 
+    /**
+     * Metodo que faz o parse de um avancado.
+     * @param input String com um avancado em modo de texto.
+     * @return um avancado.
+     */
     public static Avancado parse(String input){
         String[] campos = input.split(",");
         return new Avancado(campos[0], Integer.parseInt(campos[1]),

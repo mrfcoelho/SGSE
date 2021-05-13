@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Classe que modela uma equipa.
+ * Classe Equipa.
  * @author grupo21
  * @version 1.0
  */
@@ -25,7 +25,7 @@ public class Equipa {
     }
 
     /**
-     * Construtor parametrizado para a classe Model.Equipa.
+     * Construtor parametrizado para a classe Equipa.
      * @param nome nome da equipa.
      * @param jogadores jogadores da equipa.
      */
@@ -41,8 +41,8 @@ public class Equipa {
     }
 
     /**
-     * Construto copia para a classe Model.Equipa.
-     * @param newEquipa uma instancia da classe Model.Equipa.
+     * Construtor copia para a classe Equipa.
+     * @param newEquipa uma instancia da classe Equipa.
      */
     public Equipa (Equipa newEquipa){
         this.nome = newEquipa.getNome();
@@ -51,7 +51,7 @@ public class Equipa {
 
     //getters e setters
     /**
-     * Metodo getter para a variavel de instancia nome da classe Model.Equipa.
+     * Metodo getter para a variavel de instancia nome da classe Equipa.
      * @return String com o nome da equipa.
      */
     public String getNome() {
@@ -59,7 +59,7 @@ public class Equipa {
     }
 
     /**
-     * Metodo setter para a variavel de instancia nome da classe Model.Equipa.
+     * Metodo setter para a variavel de instancia nome da classe Equipa.
      * @param nome String com o nome da equipa.
      */
     public void setNome(String nome) {
@@ -67,7 +67,7 @@ public class Equipa {
     }
 
     /**
-     * Metodo getter para a variavel de instancia jogadores da classe Model.Equipa.
+     * Metodo getter para a variavel de instancia jogadores da classe Equipa.
      * @return map com os jogadores de uma equipa.
      */
     public Map<Integer, Jogador> getJogadores() {
@@ -79,7 +79,7 @@ public class Equipa {
     }
 
     /**
-     * Metodo setter para a variavel jogadores da classe Model.Equipa.
+     * Metodo setter para a variavel jogadores da classe Equipa.
      * @param newJogadores map com os jogadores de uma equipa.
      */
     public void setJogadores(Map<Integer,Jogador> newJogadores){
@@ -91,7 +91,7 @@ public class Equipa {
 
     @Override
     /**
-     * Metodo equals para a classe Model.Equipa.
+     * Metodo equals para a classe Equipa.
      */
     public boolean equals(Object o){
         if(this == o) return true;
@@ -103,7 +103,7 @@ public class Equipa {
 
     @Override
     /**
-     * Metodo toString para a classe equipa.
+     * Metodo toString para a classe Equipa.
      */
     public String toString(){
         StringBuilder sb = new StringBuilder();
@@ -117,7 +117,7 @@ public class Equipa {
 
     @Override
     /**
-     * Metodo clone para a classe Model.Equipa.
+     * Metodo clone para a classe Equipa.
      */
     public Equipa clone(){
         return new Equipa(this);
@@ -141,6 +141,11 @@ public class Equipa {
 
     }
 
+    /**
+     * Metodo que faz o parse de uma equipa.
+     * @param input String com uma equipa em modo de texto.
+     * @return uma equipa.
+     */
     public static Equipa parse(String input){
         String[] campos = input.split(",");
         return new Equipa(campos[0],

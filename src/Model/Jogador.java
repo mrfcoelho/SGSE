@@ -39,7 +39,7 @@ public abstract class Jogador {
     }
 
     /**
-     * Metodo getter para a variavel id para a classe Model.Jogador.
+     * Metodo getter para a variavel id para a classe Jogador.
      * @return id numero do jogador.
      */
     public int getId() {
@@ -47,7 +47,7 @@ public abstract class Jogador {
     }
 
     /**
-     * Metodo getter para a variavel de instancia nome da classe Model.Jogador.
+     * Metodo getter para a variavel de instancia nome da classe Jogador.
      * @return String com o nome de um jogador.
      */
     public String getNome() {
@@ -59,7 +59,7 @@ public abstract class Jogador {
     }
 
     /**
-     * Metodo getter para a variavel de instancia velocidade da classe Model.Jogador.
+     * Metodo getter para a variavel de instancia velocidade da classe Jogador.
      * @return int com a velocidade de um jogador.
      */
     public int getVelocidade() {
@@ -68,7 +68,7 @@ public abstract class Jogador {
     }
 
     /**
-     * Metodo getter para a variavel de instancia resistencia da classe Model.Jogador.
+     * Metodo getter para a variavel de instancia resistencia da classe Jogador.
      * @return int com a resistencia de um jogador.
      */
     public int getResistencia() {
@@ -76,7 +76,7 @@ public abstract class Jogador {
     }
 
     /**
-     * Metodo getter para a variavel de instancia destreza da classe Model.Jogador.
+     * Metodo getter para a variavel de instancia destreza da classe Jogador.
      * @return int com a destreza de um jogador.
      */
     public int getDestreza() {
@@ -84,7 +84,7 @@ public abstract class Jogador {
     }
 
     /**
-     * Metodo getter para a variavel de instancia impulsao da classe Model.Jogador.
+     * Metodo getter para a variavel de instancia impulsao da classe Jogador.
      * @return int com a impulsao de um jogador.
      */
     public int getImpulsao() {
@@ -92,7 +92,7 @@ public abstract class Jogador {
     }
 
     /**
-     * Metodo getter para a variavel de instancia jogoCabeca da classe Model.Jogador.
+     * Metodo getter para a variavel de instancia jogoCabeca da classe Jogador.
      * @return int com o jogoCabeca de um jogador.
      */
     public int getJogoCabeca() {
@@ -100,7 +100,7 @@ public abstract class Jogador {
     }
 
     /**
-     * Metodo getter para a variavel de instancia remate para a classe Model.Jogador.
+     * Metodo getter para a variavel de instancia remate para a classe Jogador.
      * @return int com o remate de um jogador.
      */
     public int getRemate() {
@@ -108,7 +108,7 @@ public abstract class Jogador {
     }
 
     /**
-     * Metodo getter para a variavel passe da classe Model.Jogador.
+     * Metodo getter para a variavel passe da classe Jogador.
      * @return int com o valor de passe de um jogador.
      */
     public int getPasse() {
@@ -116,7 +116,7 @@ public abstract class Jogador {
     }
 
     /**
-     * Metodo getter para a variavel de instancia titular da classe Model.Jogador.
+     * Metodo getter para a variavel de instancia titular da classe Jogador.
      * @return booleano com o valor de titular de um jogador.
      */
     public Estado getEstado() {
@@ -124,7 +124,7 @@ public abstract class Jogador {
     }
 
     /**
-     * Metodo getter para a variavel de instancia historial para a classe Model.Jogador.
+     * Metodo getter para a variavel de instancia historial para a classe Jogador.
      * @return Lista com as equipas em que o jogador jogou.
      */
     public List<String> getHistorial() {
@@ -133,7 +133,7 @@ public abstract class Jogador {
     }
 
     /**
-     * Metodo setter para a variavel de instancia nome da classe Model.Jogador.
+     * Metodo setter para a variavel de instancia nome da classe Jogador.
      * @param nome String com o nome de um jogador.
      */
     public void setNome(String nome) {
@@ -145,7 +145,7 @@ public abstract class Jogador {
     }
 
     /**
-     * Metodo setter para a variavel de instancia velocidade para a classe Model.Jogador.
+     * Metodo setter para a variavel de instancia velocidade para a classe Jogador.
      * @param velocidade velocidade de um jogador.
      */
     public void setVelocidade(int velocidade) {
@@ -169,7 +169,7 @@ public abstract class Jogador {
     }
 
     /**
-     * Metodo setter para a variavel de instancia impulsao da classe Model.Jogador.
+     * Metodo setter para a variavel de instancia impulsao da classe Jogador.
      * @param impulsao impulsao de um jogador.
      */
     public void setImpulsao(int impulsao) {
@@ -177,7 +177,7 @@ public abstract class Jogador {
     }
 
     /**
-     * Metodo setter para a variavel de instancia jogoCabeca da classe Model.Jogador.
+     * Metodo setter para a variavel de instancia jogoCabeca da classe Jogador.
      * @param jogoCabeca jogoCabeca de um jogador.
      */
     public void setJogoCabeca(int jogoCabeca) {
@@ -185,7 +185,7 @@ public abstract class Jogador {
     }
 
     /**
-     * Metodo setter para a variavel de instancia remate da classe Model.Jogador.
+     * Metodo setter para a variavel de instancia remate da classe Jogador.
      * @param remate remate de um jogador.
      */
     public void setRemate(int remate) {
@@ -193,7 +193,7 @@ public abstract class Jogador {
     }
 
     /**
-     * Metodo setter para a variavel de instancia passe da classe Model.Jogador.
+     * Metodo setter para a variavel de instancia passe da classe Jogador.
      * @param passe passe de um jogador.
      */
     public void setPasse(int passe) {
@@ -201,7 +201,7 @@ public abstract class Jogador {
     }
 
     /**
-     * Metodo setter para a variavel de instancia titular da classe Model.Jogador.
+     * Metodo setter para a variavel de instancia titular da classe Jogador.
      * @param novoEstado titular de um jogador.
      */
     public void setEstado(Estado novoEstado) {
@@ -209,7 +209,7 @@ public abstract class Jogador {
     }
 
     /**
-     * Metodo setter para a variavel de instancia historial da classe Model.Jogador.
+     * Metodo setter para a variavel de instancia historial da classe Jogador.
      * @param historial lista com as equipas onde o jogador jogou.
      */
     public void setHistorial(List<String> historial) {
@@ -217,7 +217,7 @@ public abstract class Jogador {
     }
 
     /**
-     * Construtor vazio para a classe Model.Jogador.
+     * Construtor vazio para a classe Jogador.
      */
     public Jogador() {
         numJogadores++;
@@ -236,8 +236,9 @@ public abstract class Jogador {
     }
 
     /**
-     * Construtor parametrizado para a classe Model.Jogador.
+     * Construtor parametrizado para a classe Jogador.
      * @param nome nome de um jogador.
+     * @param numeroCamisola numero da camisola de um jogador.
      * @param velocidade velocidade de um jogador.
      * @param resistencia resistencia de um jogador.
      * @param destreza destreza de um jogador.
@@ -246,7 +247,7 @@ public abstract class Jogador {
      * @param remate remate de um jogador.
      * @param passe passe de um jogador.
      * @param estado de um jogador.
-     * @param historial historial de um jogador.
+     * @param historial nome das equipas onde o jogador jogou.
      */
     public Jogador(String nome, int numeroCamisola, int velocidade, int resistencia, int destreza,
                    int impulsao, int jogoCabeca, int remate, int passe, Estado estado,
@@ -267,8 +268,8 @@ public abstract class Jogador {
     }
 
     /**
-     * Construtor copia para a classe Model.Jogador.
-     * @param jogador instancia da classe Model.Jogador.
+     * Construtor copia para a classe Jogador.
+     * @param jogador instancia da classe Jogador.
      */
     public Jogador(Jogador jogador) {
         this.id = jogador.getId();
@@ -289,7 +290,7 @@ public abstract class Jogador {
 
     @Override
     /**
-     * Metodo equals para a classe Model.Jogador.
+     * Metodo equals para a classe Jogador.
      */
     public boolean equals(Object o) {
         if (this == o) return true;

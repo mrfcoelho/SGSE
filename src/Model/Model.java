@@ -19,7 +19,16 @@ public class Model implements IModel{
 
         //parametrico
 
-        //copia
+
+    /**
+     * Metodo que cria um Model a partir do ficheiro de texto disponibilizado pelos docentes.
+     */
+    public Model (String filepath) {
+
+
+    }
+
+    //copia
         public Model(Model model){
             this.jogadores = model.getJogadores();
             this.equipas = model.getEquipas();

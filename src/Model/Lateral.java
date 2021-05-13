@@ -5,6 +5,7 @@ import java.util.List;
 
 /**
  * Classe que modela um lateral.
+ * E subclasse da classe Jogador.
  * @author grupo21
  * @version 1.0
  */
@@ -12,7 +13,7 @@ public class Lateral extends Jogador{
     private int cruzamento;
 
     /**
-     * Construtor vazio para a classe Model.Lateral.
+     * Construtor vazio para a classe Lateral.
      */
     public Lateral() {
         super();
@@ -20,8 +21,9 @@ public class Lateral extends Jogador{
     }
 
     /**
-     * Construtor parametrizado para a  classe Model.Lateral.
+     * Construtor parametrizado para a  classe Lateral.
      * @param nome nome de um lateral.
+     * @param numeroCamisola numero da camisola de um lateral.
      * @param velocidade velocidade de um lateral.
      * @param resistencia resistencia de um lateral.
      * @param destreza destreza de um lateral.
@@ -29,7 +31,7 @@ public class Lateral extends Jogador{
      * @param jogoCabeca jogo de cabeca de um lateral.
      * @param remate remate de um lateral.
      * @param passe passe de um lateral.
-     * @param estado de um lateral.
+     * @param estado de um lateral. (titular, suplente, entra, sai)
      * @param historial historial de um lateral.
      */
     public Lateral (String nome, int numeroCamisola, int velocidade, int resistencia, int destreza,
@@ -41,7 +43,7 @@ public class Lateral extends Jogador{
     }
 
     /**
-     * Construtor copia para a classe Model.Defesa.
+     * Construtor copia para a classe Defesa.
      * @param newLateral instancia da classe Model.Defesa.
      */
     public Lateral (Lateral newLateral) {
@@ -62,7 +64,7 @@ public class Lateral extends Jogador{
 
     @Override
     /**
-     * Metodo equals para a classe Model.Lateral.
+     * Metodo equals para a classe Lateral.
      */
     public boolean equals(Object o){
         if(this == o) return true;
@@ -81,7 +83,7 @@ public class Lateral extends Jogador{
 
     @Override
     /**
-     * Metodo toString para a classe Model.Defesa.
+     * Metodo toString para a classe Defesa.
      */
     public String toString() {
 

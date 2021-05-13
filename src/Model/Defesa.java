@@ -4,22 +4,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Classe que modela um defesa.
+ * Classe Defesa.
+ * E subclasse da classe abstracta Jogador.
  * @author grupo21
  * @version 1.0
  */
 public class Defesa extends Jogador{
 
     /**
-     * Construtor vazio para a classe Model.Defesa.
+     * Construtor vazio para a classe Defesa.
      */
     public Defesa() {
         super();
     }
 
     /**
-     * Construtor parametrizado para a classe Model.Defesa.
+     * Construtor parametrizado para a classe Defesa.
      * @param nome nome de um defesa.
+     * @param numeroCamisola numero da camisola de um defesa.
      * @param velocidade velocidade de um defesa.
      * @param resistencia resistencia de um defesa.
      * @param destreza destreza de um defesa.
@@ -27,8 +29,8 @@ public class Defesa extends Jogador{
      * @param jogoCabeca jogo de cabeca de um defesa.
      * @param remate remate de um defesa.
      * @param passe passe de um defesa.
-     * @param estado de um defesa.
-     * @param historial historial de um defesa.
+     * @param estado estado de um defesa. (titular, suplente, entra ou sai)
+     * @param historial nome das equipas onde o defesa jogou.
      */
     public Defesa (String nome, int numeroCamisola, int velocidade, int resistencia, int destreza,
                    int impulsao, int jogoCabeca, int remate, int passe, Estado estado,
@@ -38,8 +40,8 @@ public class Defesa extends Jogador{
     }
 
     /**
-     * Construtor copia para a classe Model.Defesa.
-     * @param newDefesa instancia da classe Model.Defesa.
+     * Construtor copia para a classe Defesa.
+     * @param newDefesa instancia da classe Defesa.
      */
     public Defesa (Defesa newDefesa) {
         super (newDefesa);
@@ -49,7 +51,7 @@ public class Defesa extends Jogador{
 
     @Override
     /**
-     * Metodo equals para a classe Model.Defesa.
+     * Metodo equals para a classe Defesa.
      */
     public boolean equals(Object o){
         if(this == o) return true;
@@ -68,7 +70,7 @@ public class Defesa extends Jogador{
 
     @Override
     /**
-     * Metodo toString para a classe Model.Defesa.
+     * Metodo toString para a classe Defesa.
      */
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -88,6 +90,11 @@ public class Defesa extends Jogador{
         return resultado;
     }
 
+    /**
+     * Metodo que faz o parse de um defesa.
+     * @param input String com um defesa em modo de texto.
+     * @return um defesa.
+     */
     public static Defesa parse(String input){
         String[] campos = input.split(",");
         return new Defesa(campos[0],

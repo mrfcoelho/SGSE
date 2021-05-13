@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Classe que modela um guarda-redes.
+ * Classe Guarda-Redes.
+ * E subclasse da classe abstracta Jogador.
  * @author grupo21
  * @version 1.0
  */
@@ -13,7 +14,7 @@ public class GuardaRedes extends Jogador {
     private int elasticidade;
 
     /**
-     * Construtor vazio para a classe Model.GuardaRedes.
+     * Construtor vazio para a classe GuardaRedes.
      */
     public GuardaRedes() {
         super();
@@ -21,8 +22,9 @@ public class GuardaRedes extends Jogador {
     }
 
     /**
-     * Construtor parametrizado para a classe Model.GuardaRedes.
+     * Construtor parametrizado para a classe GuardaRedes.
      * @param nome nome do guardaredes.
+     * @param numeroCamisola numero da camisola do guardaredes.
      * @param velocidade velocidade do guardaredes.
      * @param resistencia resistencia do guardaredes.
      * @param destreza destreza do guardaredes.
@@ -30,7 +32,7 @@ public class GuardaRedes extends Jogador {
      * @param jogoCabeca jogo de cabeca do guardaredes.
      * @param remate remate do guardaredes.
      * @param passe passe do guardaredes.
-     * @param estado do guardaredes.
+     * @param estado do guardaredes. (titular, suplente, entra, sai)
      * @param elasticidade elasticidade do guardaredes.
      * @param historial historial do guardaredes.
      */
@@ -69,7 +71,7 @@ public class GuardaRedes extends Jogador {
 
     @Override
     /**
-     * Metodo equals para a classe Model.GuardaRedes.
+     * Metodo equals para a classe GuardaRedes.
      */
     public boolean equals(Object o){
         if(this == o) return true;
@@ -80,7 +82,7 @@ public class GuardaRedes extends Jogador {
 
     @Override
     /**
-     * Metodo que permite clonar um Model.GuardaRedes.
+     * Metodo que permite clonar um GuardaRedes.
      */
     public GuardaRedes clone () {
         return new GuardaRedes(this);
@@ -109,6 +111,11 @@ public class GuardaRedes extends Jogador {
         return resultado;
     }
 
+    /**
+     * Metodo que faz o parse de um Guarda-Redes.
+     * @param input String com um Guarda-Redes em modo de texto.
+     * @return um guarda-redes.
+     */
     public static GuardaRedes parse(String input){
         String[] campos = input.split(",");
         return new GuardaRedes(campos[0],

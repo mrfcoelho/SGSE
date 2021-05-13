@@ -6,7 +6,7 @@ import View.IView;
 public interface IControl {
     //metodos abstratos
 
-    //constantes
+    //constantes ffff
 
     //metodos concretos (default methods)
     void setModel(IModel model);
