@@ -7,6 +7,7 @@ public class Model implements IModel{
     //variaveis de instancia
     private Map<Integer,Jogador> jogadores; //lista com todos os jogadores do sitema (ID unico + jogador)
     private Map<String,Equipa> equipas; //lista com todas as equipas do sitema (Nome + equipa)
+    // todo private List<Jogo> jogos;
 
     //variaveis de classe
 
@@ -58,4 +59,16 @@ public class Model implements IModel{
     //metodos abstract
 
     //metodos especificos
+    public Jogador getJogador(String nome){
+        Jogador resultado = null;
+        //resultado = this.jogadores.values().stream().filter(x->x.getNome().equals(nome)).collect();
+        for(Jogador j : this.jogadores.values()){
+            if(j.getNome().equals(nome)){
+                //?System.out.println("Found!!!");
+                resultado = j.clone();
+                break;
+            }
+        }
+        return resultado;
+    }
 }

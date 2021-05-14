@@ -1,5 +1,7 @@
 package View;
 
+import java.util.List;
+
 public class View implements IView{
     /**
      * imprime na tela a parte superior do menu
@@ -63,6 +65,21 @@ public class View implements IView{
         System.out.println("*  4 - Médio                                     *");
         System.out.println("*  5 - Avançado                                  *");
         System.out.println("*                                                *");
+        System.out.println("*                                                *");
+    }
+
+    /**
+     * Menu para registo de novo jogador
+     */
+    public void menuConsultarJogador(List<String> resultado) {
+        System.out.println("*                                                *");
+        for(String s : resultado){
+            System.out.print("* " + s );
+            for(int i=0 ; i < 46 - s.length() ; i++){
+                System.out.print(" ");
+            }
+            System.out.println(" *");
+        }
         System.out.println("*                                                *");
     }
 

@@ -1,5 +1,7 @@
 package View;
 
+import java.util.List;
+
 public interface IView {
     //metodos abstratos
 
@@ -22,14 +24,19 @@ public interface IView {
     void menuMidIO(String io);
 
     /**
+     * Menu Principal
+     */
+    void menuPrincipal();
+
+    /**
      * Menu para registo de novo jogador
      */
     void menuRegistarNovoJogador();
 
     /**
-     * Menu Principal
+     * Menu para consulta de um jogador
      */
-    void menuPrincipal();
+    void menuConsultarJogador(List<String> resultado);
 
     //metodos concretos de class (static methods)
 

@@ -107,9 +107,9 @@ public class Equipa {
      */
     public String toString(){
         StringBuilder sb = new StringBuilder();
-        sb.append("Equipa:").append(this.nome).append("\n");
+        sb.append("Equipa:").append(this.nome);
         for(Map.Entry<Integer,Jogador> e : this.jogadores.entrySet()){
-            sb.append(e.getValue().toString()).append("\n");
+            sb.append("\n").append(e.getValue().toString());
         }
 
         return sb.toString();

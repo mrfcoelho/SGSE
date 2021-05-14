@@ -17,8 +17,6 @@ public class Jogo {
     //variaveis de classe
 
     //getters e setters
-
-
     public String getEquipaCasa() {
         return EquipaCasa;
     }
@@ -154,12 +152,45 @@ public class Jogo {
 
     @Override
     public String toString() {
-        return "Model.Jogo{" +
-                "EquipaCasa=" + EquipaCasa +
-                ", EquipaFora=" + EquipaFora +
-                '}';
+        return "Jogo:"
+                + EquipaCasa + "," + EquipaFora + ","
+                + ScoreCasa + "," + ScoreFora + ","
+                + Data + ","
+                + JogadoresCasa + "," + SubstituicoesCasa + ","
+                + JogadoresFora + "," + SubstituicoesFora;
     }
 
     //metodos especificos
+    public static Jogo parse(String input){
+        String[] campos = input.split(",");
+        String EquipaCasa = campos[0];
+        String EquipaFora = campos[1];
+        int ScoreCasa = Integer.parseInt(campos[2]);
+        int ScoreFora = Integer.parseInt(campos[3]);
+        String Data = campos[4];
+        ArrayList<Integer> JogadoresCasa = new ArrayList<>();
+        ArrayList<String> SubstituicoesCasa  =new ArrayList<>();
+        ArrayList<Integer> JogadoresFora = new ArrayList<>();
+        ArrayList<String> SubstituicoesFora = new ArrayList<>();
+        int i=5;
+        while(!campos[i].contains("->")){
+            JogadoresCasa.add(Integer.parseInt(campos[i++]));
+        }
 
+        while(campos[i].contains("->")){
+            SubstituicoesCasa.add(campos[i++]);
+        }
+
+        while(!campos[i].contains("->")){
+            JogadoresFora.add(Integer.parseInt(campos[i++]));
+        }
+
+        while(i< campos.length && campos[i].contains("->")){
+            SubstituicoesFora.add(campos[i++]);
+        }
+
+        return new Jogo(EquipaCasa, EquipaFora, ScoreCasa, ScoreFora, Data,
+                JogadoresCasa, SubstituicoesCasa,
+                JogadoresFora, SubstituicoesFora);
+    }
 }

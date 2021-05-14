@@ -107,7 +107,8 @@ public class Lateral extends Jogador{
 
     public static Lateral parse(String input){
         String[] campos = input.split(",");
-        return new Lateral(campos[0], Integer.parseInt(campos[1]),
+        return new Lateral(campos[0],
+                Integer.parseInt(campos[1]),
                 Integer.parseInt(campos[2]),
                 Integer.parseInt(campos[3]),
                 Integer.parseInt(campos[4]),
@@ -115,8 +116,8 @@ public class Lateral extends Jogador{
                 Integer.parseInt(campos[6]),
                 Integer.parseInt(campos[7]),
                 Integer.parseInt(campos[8]),
-                Estado.valueOf(campos[9]),
-                Integer.parseInt(campos[10]),
+                Estado.SUPLENTE,
+                Integer.parseInt(campos[9]),
                 new ArrayList<>());
     }
 }

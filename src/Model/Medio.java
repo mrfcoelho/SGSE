@@ -115,8 +115,8 @@ public class Medio extends Jogador{
                 Integer.parseInt(campos[6]),
                 Integer.parseInt(campos[7]),
                 Integer.parseInt(campos[8]),
-                Estado.valueOf(campos[9]),
-                Integer.parseInt(campos[10]),
+                Estado.SUPLENTE,
+                Integer.parseInt(campos[9]),
                 new ArrayList<>());
     }
 }

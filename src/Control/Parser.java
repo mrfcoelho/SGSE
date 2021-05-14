@@ -16,32 +16,19 @@ import Model.*;
 import jdk.swing.interop.SwingInterOpUtils;
 
 public class Parser {
-    public static void parse() /*throws LinhaIncorretaException*/ {
-        List<String> linhas = new ArrayList<>();
-                linhas = Parser.lerFicheiro("Input/logs.txt");
-
-                Map<String, Equipa> equipas = new HashMap<>(); //nome, equipa
+    public static void parse(IModel model) throws LinhaIncorretaException {
+        List<String> linhas = lerFicheiro("Input/logs.txt");
+        Map<String, Equipa> equipas = new HashMap<>(); //nome, equipa
         Map<Integer, Jogador> jogadores = new HashMap<>(); //numero, jogador
         List<Jogo> jogos = new ArrayList<>();
         Equipa ultima = null;
         Jogador j = null;
         String[] linhaPartida;
-
         for (String linha : linhas) {
+            //?System.out.println(linha);
+            //?System.out.println(jogadores);
+            //?System.out.println(equipas);
             linhaPartida = linha.split(":", 2);
-
-            switch (linhaPartida[0]) {
-
-                //System.out.println(linhaPartida[0]);
-            }
-        }
-
-
-    }
-        // for (String linha : linhas) {
-        //}
-
-            /*linhaPartida = linha.split(":", 2);
             switch (linhaPartida[0]) {
                 case "Equipa":
                     Equipa e = Equipa.parse(linhaPartida[1]);
@@ -83,38 +70,36 @@ public class Parser {
                         throw new LinhaIncorretaException(); //we need to insert the player into the team
                     ultima.insereJogador(j.clone()); //if no team was parsed previously, file is not well-formed
                     break;
-
-               /*case "Jogo":
+                case "Jogo":
+                    //?System.out.println(linhaPartida[1]);
                     Jogo jo = Jogo.parse(linhaPartida[1]);
+
                     jogos.add(jo);
+                    //?System.out.println(jo);
+
                     break;
-
-
                 default:
                     throw new LinhaIncorretaException();
-
-
             }
+            model.setJogadores(jogadores);
+            model.setEquipas(equipas);
         }
-    }
 
         //debug
-        for (Equipa e: equipas.values()){
+        /*
+        for (Equipa e : equipas.values()) {
             System.out.println(e.toString());
         }
-        for (Jogo jog: jogos){
+        for (Jogo jog : jogos) {
             System.out.println(jog.toString());
-  */
+        }
+         */
+    }
 
     public static List<String> lerFicheiro(String nomeFich) {
-        // reading text file into List in Java 7
-        List<String> lines = new ArrayList<>();
-        try {
-            lines = Files.readAllLines(Paths.get(nomeFich), StandardCharsets.UTF_8);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+        List<String> lines;
+        try { lines = Files.readAllLines(Paths.get(nomeFich), StandardCharsets.UTF_8); }
+        catch(IOException exc) { lines = new ArrayList<>(); }
         return lines;
     }
 }

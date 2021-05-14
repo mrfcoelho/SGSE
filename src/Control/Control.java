@@ -6,6 +6,7 @@ import View.*;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class Control implements IControl{
     //variaveis de instancia
@@ -175,9 +176,40 @@ public class Control implements IControl{
      * Devolve lista com informação do jogador
      * @return lista com informação
      */
-    public List<String> consultarJogador(){
-        ArrayList<String> resultado = new ArrayList<>();
-        return resultado;
+    public void consultarJogador(){
+        this.view.menuTop();
+        this.view.menuMidIO("Indique o nome do jogador:");
+        this.view.menuBottom();
+
+        String nome = Input.lerString();
+        System.out.println(nome);//?
+        List<String> resultado = consultaJogadorNome(nome);
+        System.out.println(resultado);//?
+
+        //imprimir resultado
+        this.view.menuTop();
+        this.view.menuConsultarJogador(resultado);
+        this.view.menuBottom();
+    }
+
+    private List<String> consultaJogadorNome(String nome) {
+        Jogador c = this.model.getJogador(nome);
+
+        List <String> result = new ArrayList<> ();
+
+        if(c!=null) {
+            result.add("Nome: " + nome);
+            result.add("Numero de camisola: " + String.valueOf(c.getNumeroCamisola()));
+            result.add("Velocidade: " + String.valueOf(c.getVelocidade()));
+            result.add("Destreza: " + String.valueOf(c.getDestreza()));
+            result.add("Impulsão: " + String.valueOf(c.getImpulsao()));
+            result.add("Jogo de cabeça: " + String.valueOf(c.getJogoCabeca()));
+            result.add("Remate: " + String.valueOf(c.getRemate()));
+            result.add("Passe: " + String.valueOf(c.getPasse()));
+            result.add("Historial:");
+            result.addAll(c.getHistorial());
+        }
+        return result;
     }
 
     /**
@@ -225,20 +257,30 @@ public class Control implements IControl{
     public void carregaEstado(){
         //imprime a janela
         this.view.menuTop();
-        this.view.menuMidIO("Nome do ficheiro:");
+        this.view.menuMidIO("Nome do ficheiro [0 - Default]:");
         this.view.menuBottom();
 
         String fileName = Input.lerString();
 
-        try {
-            FileInputStream fin = new FileInputStream(fileName);
-            ObjectInputStream ois = new ObjectInputStream(fin);
-            this.model = new Model((Model) ois.readObject());
-            ois.close();
-        }catch(IOException | ClassNotFoundException e){
-            System.out.println(e);
-            model = new Model();
+        if(!fileName.equals("0")){
+            try {
+                FileInputStream fin = new FileInputStream(fileName);
+                ObjectInputStream ois = new ObjectInputStream(fin);
+                this.model = new Model((Model) ois.readObject());
+                ois.close();
+            }catch(IOException | ClassNotFoundException e){
+                System.out.println(e);
+                model = new Model();
+            }
+        }else{
+            try {
+                Parser.parse(this.model);
+            }catch (Exception e){
+
+            }
         }
+
+
     }
 
 }
