@@ -1,5 +1,6 @@
-package Control;
+package Tests;
 
+import Control.Parser;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

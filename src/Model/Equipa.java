@@ -1,6 +1,6 @@
 package Model;
 
-import java.util.ArrayList;
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -9,45 +9,47 @@ import java.util.Map;
  * @author grupo21
  * @version 1.0
  */
-public class Equipa {
+
+public class Equipa implements Serializable {
     //variaveis de instancia
     private String nome;
-    private Map<Integer,Jogador> jogadores;
+    private Map<Integer,Jogador> jogadores; //numero camisola + jogador
 
-    //variaveis de class
+    //variaveis de classe
 
-    /**
-     * Construtor vazio para a classe Equipa.
-     */
-    public Equipa(){
-        this.nome = "";
-        this.jogadores = new HashMap<>();
-    }
-
-    /**
-     * Construtor parametrizado para a classe Equipa.
-     * @param nome nome da equipa.
-     * @param jogadores jogadores da equipa.
-     */
-    public Equipa (String nome, Map<Integer, Jogador> jogadores) {
-        this.nome = nome;
-        this.jogadores = new HashMap<>();
-
-        for (Jogador j: jogadores.values()) {
-
-            this.jogadores.put(j.getId(), j.clone());
+    //construtor
+        //vazio
+        /**
+         * Construtor vazio para a classe Equipa.
+         */
+        public Equipa(){
+            this.nome = "";
+            this.jogadores = new HashMap<>();
         }
 
-    }
+        //parametrico
+        /**
+         * Construtor parametrizado para a classe Equipa.
+         * @param nome nome da equipa.
+         * @param jogadores jogadores da equipa.
+         */
+        public Equipa (String nome, Map<Integer, Jogador> jogadores) {
+            this.nome = nome;
+            this.jogadores = new HashMap<>();
+            for (Jogador j: jogadores.values()) {
+                this.jogadores.put(j.getNumeroCamisola(), j.clone());
+            }
+        }
 
-    /**
-     * Construtor copia para a classe Equipa.
-     * @param newEquipa uma instancia da classe Equipa.
-     */
-    public Equipa (Equipa newEquipa){
-        this.nome = newEquipa.getNome();
-        this.jogadores = newEquipa.getJogadores();
-    }
+        //copia
+        /**
+         * Construtor copia para a classe Equipa.
+         * @param newEquipa uma instancia da classe Equipa.
+         */
+        public Equipa (Equipa newEquipa){
+            this.nome = newEquipa.getNome();
+            this.jogadores = newEquipa.getJogadores();
+        }
 
     //getters e setters
     /**
@@ -89,10 +91,8 @@ public class Equipa {
         }
     }
 
+    //metodos override
     @Override
-    /**
-     * Metodo equals para a classe Equipa.
-     */
     public boolean equals(Object o){
         if(this == o) return true;
         if(o==null || this.getClass() != o.getClass()) return false;
@@ -102,9 +102,6 @@ public class Equipa {
     }
 
     @Override
-    /**
-     * Metodo toString para a classe Equipa.
-     */
     public String toString(){
         StringBuilder sb = new StringBuilder();
         sb.append("Equipa:").append(this.nome);
@@ -116,19 +113,17 @@ public class Equipa {
     }
 
     @Override
-    /**
-     * Metodo clone para a classe Equipa.
-     */
-    public Equipa clone(){
-        return new Equipa(this);
-    }
+    public Equipa clone(){ return new Equipa(this); }
 
+    //metodos abstract
+
+    //metodos especificos
     /**
      * Metodo que determina a habilidade de uma equipa, consoante as habilidades de cada jogador.
-     * @return
+     * @return valor global da habilidade da equipa.
      */
     public double habilidade(){
-        return 0;
+        return this.jogadores.values().stream().mapToDouble(Jogador::habilidade).sum();
     }
 
     /**
@@ -137,10 +132,11 @@ public class Equipa {
      */
     public void insereJogador(Jogador j) {
 
-        this.jogadores.put(j.getId(), j.clone());
+        this.jogadores.put(j.getNumeroCamisola(), j.clone());
 
     }
 
+    //metodos de classe
     /**
      * Metodo que faz o parse de uma equipa.
      * @param input String com uma equipa em modo de texto.

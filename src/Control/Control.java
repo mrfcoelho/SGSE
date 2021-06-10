@@ -1,12 +1,19 @@
 package Control;
 
 import Model.*;
-import View.*;
+import View.IView;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
+import java.util.stream.Collectors;
+
+/**
+ * Interface para o control.
+ * @author grupo21
+ * @version 1.0
+ */
 
 public class Control implements IControl{
     //variaveis de instancia
@@ -40,6 +47,7 @@ public class Control implements IControl{
     public void start(){
         char option;
         String buffer;
+        Scanner input = new Scanner(System.in);
 
         //ciclo do programa
         do{
@@ -58,24 +66,25 @@ public class Control implements IControl{
 
             //seleciona o que fazer em função da opção
             switch (option){
-                case '1' : registarNovoJogador(); break;
-                case '2' : registarNovaEquipa(); break;
-                case '3' : associarJogador(); break;
-                case '4' : consultarJogador(); break;
-                case '5' : consultarEquipa(); break;
-                case '6' : novoJogo(); break;
-                case 'S' : salvaEstado(); break;
-                case 'L' : carregaEstado(); break;
+                case '1' : registarNovoJogador(); input.nextLine(); break;
+                case '2' : registarNovaEquipa(); input.nextLine(); break;
+                case '3' : associarJogador();  input.nextLine(); break;
+                case '4' : consultarJogador();  input.nextLine(); break;
+                case '5' : consultarEquipa();  input.nextLine(); break;
+                case '6' : novoJogo();  input.nextLine(); break;
+                case 'S' : salvaEstado();  input.nextLine(); break;
+                case 'L' : carregaEstado();  input.nextLine(); break;
+                case 'T': System.out.println(this.model.toString());
                 default: break;
             }
         }while (option != 'X');
+        input.close();
     }
 
     /**
      * Criar um novo jogador
-     * @return jogador criado
      */
-    public Jogador registarNovoJogador(){
+    private void registarNovoJogador(){
         //imprime a janela
         this.view.menuTop();
         this.view.menuRegistarNovoJogador();
@@ -83,7 +92,20 @@ public class Control implements IControl{
 
         int tipo = Input.lerInt();
 
-        return registarNovoJogadorTipo(tipo);
+        Jogador resultado = registarNovoJogadorTipo(tipo);
+
+        try{
+            this.model.adicionaJogador(resultado);
+
+            //imprime o resultado
+            this.view.menuTop();
+            this.view.menuMidIO("Jogador registado com sucesso!");
+            this.view.menuBottom();
+        }catch (JogadorRepetidoException e){
+            this.view.menuTop();
+            this.view.menuMidIO(e.getMessage());
+            this.view.menuBottom();
+        }
     }
 
     /**
@@ -161,78 +183,377 @@ public class Control implements IControl{
 
     /**
      * Cria uma nova equipa
-     * @return equipa criada
      */
-    public Equipa registarNovaEquipa(){
-        return new Equipa();
+    private void registarNovaEquipa(){
+        //imprime a janela
+        this.view.menuTop();
+        this.view.menuMidIO("Nome da equipa: ");
+        this.view.menuBottom();
+
+        String nome = Input.lerString();
+
+        try{
+            this.model.adicionaEquipa(nome);
+
+            //imprime o resultado
+            this.view.menuTop();
+            this.view.menuMidIO("Equipa registada com sucesso!");
+            this.view.menuBottom();
+        }catch (EquipaRepetidaException e){
+            this.view.menuTop();
+            this.view.menuMidIO(e.getMessage());
+            this.view.menuBottom();
+        }
     }
 
     /**
      * Associa um jogador a uma equipa
      */
-    public void associarJogador(){};
+    private void associarJogador(){
+        //imprime a janela
+        this.view.menuTop();
+        this.view.menuMidIO("Nome do jogador a associar: ");
+        this.view.menuBottom();
+
+        String nomeJogador = Input.lerString();
+
+        //imprime a janela
+        this.view.menuTop();
+        this.view.menuMidIO("Nome da equipa a associar: ");
+        this.view.menuBottom();
+
+        String nomeEquipa = Input.lerString();
+
+        try {
+            this.model.associaJogador(nomeJogador, nomeEquipa);
+
+            //imprime o resultado
+            this.view.menuTop();
+            this.view.menuMidIO(nomeJogador + " associado com sucesso a " + nomeEquipa + "!");
+            this.view.menuBottom();
+        }catch (JogadorNotFoundException | EquipaNotFoundException e1){
+            this.view.menuTop();
+            this.view.menuMidIO(e1.getMessage());
+            this.view.menuBottom();
+        }
+    }
 
     /**
      * Devolve lista com informação do jogador
-     * @return lista com informação
      */
-    public void consultarJogador(){
+    private void consultarJogador(){
         this.view.menuTop();
         this.view.menuMidIO("Indique o nome do jogador:");
         this.view.menuBottom();
 
         String nome = Input.lerString();
-        System.out.println(nome);//?
-        List<String> resultado = consultaJogadorNome(nome);
-        System.out.println(resultado);//?
+        try {
+            Jogador c = this.model.getJogador(nome);
+            List<String> resultado = c.consultaJogador();
 
-        //imprimir resultado
-        this.view.menuTop();
-        this.view.menuConsultarJogador(resultado);
-        this.view.menuBottom();
-    }
-
-    private List<String> consultaJogadorNome(String nome) {
-        Jogador c = this.model.getJogador(nome);
-
-        List <String> result = new ArrayList<> ();
-
-        if(c!=null) {
-            result.add("Nome: " + nome);
-            result.add("Numero de camisola: " + String.valueOf(c.getNumeroCamisola()));
-            result.add("Velocidade: " + String.valueOf(c.getVelocidade()));
-            result.add("Destreza: " + String.valueOf(c.getDestreza()));
-            result.add("Impulsão: " + String.valueOf(c.getImpulsao()));
-            result.add("Jogo de cabeça: " + String.valueOf(c.getJogoCabeca()));
-            result.add("Remate: " + String.valueOf(c.getRemate()));
-            result.add("Passe: " + String.valueOf(c.getPasse()));
-            result.add("Historial:");
-            result.addAll(c.getHistorial());
+            //imprimir resultado
+            this.view.menuTop();
+            this.view.menuMidIO(resultado);
+            this.view.menuBottom();
+        }catch (JogadorNotFoundException e){
+            //imprimir excepções
+            this.view.menuTop();
+            this.view.menuMidIO(e.getMessage());
+            this.view.menuBottom();
         }
-        return result;
     }
 
     /**
      * Devolve lista com informação da equipa
-     * @return lista com informação
      */
-    public List<String> consultarEquipa(){
-        ArrayList<String> resultado = new ArrayList<>();
-        return resultado;
+    private void consultarEquipa(){
+        this.view.menuTop();
+        this.view.menuMidIO("Indique o nome da Equipa: ");
+        this.view.menuBottom();
+
+        String nome = Input.lerString();
+
+        try {
+            Equipa c = this.model.getEquipa(nome);
+
+            List<String> resultado = new ArrayList<> ();
+
+            resultado.add("Nome: " + nome);
+            resultado.add("");
+            resultado.add("Jogadores:");
+            for(Jogador j : c.getJogadores().values()){
+                resultado.add(j.getNumeroCamisola() + " - " + j.getNome());
+            }
+            resultado.add("");
+            resultado.add("Habilidade total: " + c.habilidade());
+
+            //imprimir resultado
+            this.view.menuTop();
+            this.view.menuMidIO(resultado);
+            this.view.menuBottom();
+        }catch (EquipaNotFoundException e){
+            //imprimir excepções
+            this.view.menuTop();
+            this.view.menuMidIO(e.getMessage());
+            this.view.menuBottom();
+        }
     }
 
     /**
      * Cria novo jogo
      */
-    public Jogo novoJogo(){
-        Jogo resultado = new Jogo();
-        return resultado;
+    private void novoJogo(){
+        String equipaCasaNome;
+        Map<Integer,Jogador> equipaCasaTodos;
+        Map<Integer,Jogador> equipaCasaTitulares = new HashMap<>();
+        Map<Integer,Jogador> equipaCasaSuplentes;
+        List<String> equipaCasaListaSubstituicoes = new ArrayList<>();
+        int equipaCasaSubstituicoes;
+        double equipaCasaHabilidade = 0;
+
+        String equipaForaNome;
+        Map<Integer,Jogador> equipaForaTodos;
+        Map<Integer,Jogador> equipaForaTitulares = new HashMap<>();
+        Map<Integer,Jogador> equipaForaSuplentes;
+        List<String> equipaForaListaSubstituicoes = new ArrayList<>();
+        int equipaForaSubstituicoes;
+        double equipaForaHabilidade = 0;
+
+        int scoreCasa = 0;
+        int scoreFora = 0;
+        String data ;
+
+        ArrayList<String> temp = new ArrayList<>();
+        String errors = "";
+        String substituicaoTemp = "";
+        boolean flag = true;
+        int aux;
+
+        //data
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        data = dtf.format(LocalDateTime.now());
+
+        //equipaCasa
+        this.view.menuTop();
+        this.view.menuMidIO("Indique o nome da Equipa da casa: ");
+        this.view.menuBottom();
+        equipaCasaNome = Input.lerString();
+        try {
+            equipaCasaTodos = this.model.getEquipa(equipaCasaNome).getJogadores();
+            equipaCasaHabilidade = this.model.getEquipa(equipaCasaNome).habilidade();
+            equipaCasaSuplentes = new HashMap<>(equipaCasaTodos);
+            equipaCasaTitulares = new HashMap<>();
+
+            while(flag){
+                temp.clear();
+                temp.add(equipaCasaNome);
+                temp.add("");
+                temp.add("Titulares:");
+                for(Jogador j : equipaCasaTitulares.values()){
+                    temp.add(j.getClass().getSimpleName() + " - " + j.getNome() + " " + j.getNumeroCamisola()) ;
+                }
+                temp.add("");
+                temp.add("Suplentes:");
+                for(Jogador j : equipaCasaSuplentes.values()){
+                    temp.add(j.getClass().getSimpleName() + " - " + j.getNome() + " " + j.getNumeroCamisola()) ;
+                }
+                temp.add("");
+                temp.add("Número dos jogadores titulares: ");
+                temp.add("[0 - sair com a equipa atual]");
+
+                this.view.menuTop();
+                this.view.menuMidIO(temp);
+                this.view.menuBotIO(errors);
+                errors = "";
+
+                aux = Input.lerInt();
+                if(aux==0 && equipaCasaTitulares.keySet().size()==11){
+                    flag=false;
+                    temp.clear();
+                    temp.add(equipaCasaNome);
+                    temp.add("");
+                    temp.add("Titulares:");
+                    for(Jogador j : equipaCasaTitulares.values()){
+                        temp.add(j.getClass().getSimpleName() + " - " + j.getNome() + " " + j.getNumeroCamisola()) ;
+                    }
+                    temp.add("");
+                    temp.add("Suplentes:");
+                    for(Jogador j : equipaCasaSuplentes.values()){
+                        temp.add(j.getClass().getSimpleName() + " - " + j.getNome() + " " + j.getNumeroCamisola()) ;
+                    }
+                }else{
+                    if(!equipaCasaTodos.containsKey(aux)){
+                        errors = "Número inválido!";
+                    }else if(equipaCasaTitulares.keySet().size()==11){
+                        errors = "Só pode ter 11 titulares!";
+                    }else{
+                        equipaCasaTitulares.put(aux,equipaCasaTodos.get(aux));
+                        equipaCasaSuplentes.remove(aux);
+                    }
+                }
+            }
+
+            this.view.menuTop();
+            this.view.menuMidIO(temp);
+            this.view.menuBotIO("Total de substituições a fazer: ");
+            equipaCasaSubstituicoes = Input.lerInt();
+
+            flag = true;
+            aux = 1;
+            errors = "Número dos jogadores [out->in]:";
+
+            while(flag && equipaCasaSubstituicoes>0){
+                this.view.menuTop();
+                this.view.menuMidIO(temp);
+                this.view.menuBotIO(aux + "/" + equipaCasaSubstituicoes + " - " + errors);
+                substituicaoTemp = Input.lerString();
+                String[] substituicaoTempPartido = substituicaoTemp.split("->");
+
+                if(substituicaoTempPartido.length!=2){
+                    errors = "Substituição mal introduzida!";
+                }else if(!equipaCasaTitulares.containsKey(Integer.parseInt(substituicaoTempPartido[0]))){
+                    errors = "Jogador a sair não é titular!";
+                }else if(!equipaCasaSuplentes.containsKey(Integer.parseInt(substituicaoTempPartido[1]))){
+                    errors = "Jogador a entrar não é suplente!";
+                }else{
+                    if(aux==equipaCasaSubstituicoes)
+                        flag = false;
+                    equipaCasaListaSubstituicoes.add(substituicaoTemp);
+                    aux++;
+                    errors = "Número dos jogadores [out->in]:";
+                }
+            }
+
+            //equipaFora
+            this.view.menuTop();
+            this.view.menuMidIO("Indique o nome da Equipa da fora: ");
+            this.view.menuBottom();
+            equipaForaNome = Input.lerString();
+
+            errors = "";
+            flag=true;
+
+            try {
+                equipaForaTodos = this.model.getEquipa(equipaForaNome).getJogadores();
+                equipaForaHabilidade = this.model.getEquipa(equipaForaNome).habilidade();
+                equipaForaSuplentes = new HashMap<>(equipaForaTodos);
+                equipaForaTitulares = new HashMap<>();
+
+                while(flag){
+                    temp.clear();
+                    temp.add(equipaForaNome);
+                    temp.add("");
+                    temp.add("Titulares:");
+                    for(Jogador j : equipaForaTitulares.values()){
+                        temp.add(j.getClass().getSimpleName() + " - " + j.getNome() + " " + j.getNumeroCamisola()) ;
+                    }
+                    temp.add("");
+                    temp.add("Suplentes:");
+                    for(Jogador j : equipaForaSuplentes.values()){
+                        temp.add(j.getClass().getSimpleName() + " - " + j.getNome() + " " + j.getNumeroCamisola()) ;
+                    }
+                    temp.add("");
+                    temp.add("Número dos jogadores titulares: ");
+                    temp.add("[0 - sair com a equipa atual]");
+
+                    this.view.menuTop();
+                    this.view.menuMidIO(temp);
+                    this.view.menuBotIO(errors);
+                    errors = "";
+
+                    aux = Input.lerInt();
+                    if(aux==0 && equipaForaTitulares.keySet().size()==11){
+                        flag=false;
+                        temp.clear();
+                        temp.add(equipaForaNome);
+                        temp.add("");
+                        temp.add("Titulares:");
+                        for(Jogador j : equipaForaTitulares.values()){
+                            temp.add(j.getClass().getSimpleName() + " - " + j.getNome() + " " + j.getNumeroCamisola()) ;
+                        }
+                        temp.add("");
+                        temp.add("Suplentes:");
+                        for(Jogador j : equipaForaSuplentes.values()){
+                            temp.add(j.getClass().getSimpleName() + " - " + j.getNome() + " " + j.getNumeroCamisola()) ;
+                        }
+                    }else{
+                        if(!equipaForaTodos.containsKey(aux)){
+                            errors = "Número inválido!";
+                        }else if(equipaForaTitulares.keySet().size()==11){
+                            errors = "Só pode ter 11 titulares!";
+                        }else{
+                            equipaForaTitulares.put(aux,equipaForaTodos.get(aux));
+                            equipaForaSuplentes.remove(aux);
+                        }
+                    }
+                }
+
+                this.view.menuTop();
+                this.view.menuMidIO(temp);
+                this.view.menuBotIO("Total de substituições a fazer: ");
+                equipaForaSubstituicoes = Input.lerInt();
+
+                flag = true;
+                aux = 1;
+                errors = "Número dos jogadores [out->in]:";
+
+                while(flag && equipaForaSubstituicoes>0){
+                    this.view.menuTop();
+                    this.view.menuMidIO(temp);
+                    this.view.menuBotIO(aux + "/" + equipaForaSubstituicoes + " - " + errors);
+                    substituicaoTemp = Input.lerString();
+                    String[] substituicaoTempPartido = substituicaoTemp.split("->");
+
+                    if(substituicaoTempPartido.length!=2){
+                        errors = "Substituição mal introduzida!";
+                    }else if(!equipaForaTitulares.containsKey(Integer.parseInt(substituicaoTempPartido[0]))){
+                        errors = "Jogador a sair não é titular!";
+                    }else if(!equipaForaSuplentes.containsKey(Integer.parseInt(substituicaoTempPartido[1]))){
+                        errors = "Jogador a entrar não é suplente!";
+                    }else{
+                        if(aux==equipaForaSubstituicoes)
+                            flag = false;
+                        equipaForaListaSubstituicoes.add(substituicaoTemp);
+                        aux++;
+                        errors = "Número dos jogadores [out->in]:";
+                    }
+                }
+
+                //calcula o resultado
+                int win = (int)(5 * Math.random());
+                int loose = (int)(5 * Math.random());
+                if(equipaCasaHabilidade*0.6>equipaForaHabilidade*0.4){
+                    scoreCasa = win;
+                    scoreFora = loose;
+                }else{
+                    scoreCasa = loose;
+                    scoreFora = win;
+                }
+
+                //adicionar novo jogo ao model
+                this.model.adicionaJogo(new Jogo(equipaCasaNome, equipaForaNome, scoreCasa, scoreFora, data,
+                        new ArrayList<>(equipaCasaTitulares.keySet()),
+                        new ArrayList<>(equipaCasaListaSubstituicoes),
+                        new ArrayList<>(equipaForaTitulares.keySet()),
+                        new ArrayList<>(equipaForaListaSubstituicoes)));
+            }catch (EquipaNotFoundException e){
+                //imprimir excepções
+                this.view.menuTop();
+                this.view.menuMidIO(e.getMessage());
+                this.view.menuBottom();
+            }
+        }catch (EquipaNotFoundException e){
+            //imprimir excepções
+            this.view.menuTop();
+            this.view.menuMidIO(e.getMessage());
+            this.view.menuBottom();
+        }
     }
 
     /**
      * Guarda o estado atual num ficheiro txt
      */
-    public void salvaEstado(){
+    private void salvaEstado(){
         //imprime a janela
         this.view.menuTop();
         this.view.menuMidIO("Nome do ficheiro:");
@@ -245,6 +566,11 @@ public class Control implements IControl{
             ObjectOutputStream objectOutput = new ObjectOutputStream(fileOutput);
             objectOutput.writeObject(this.model);
             objectOutput.close();
+
+            //imprime o resultado
+            this.view.menuTop();
+            this.view.menuMidIO("Estado salvo com sucesso!");
+            this.view.menuBottom();
         }catch(IOException e){
             System.out.println(e);
         }
@@ -254,7 +580,7 @@ public class Control implements IControl{
      * Carrega estado de um ficheiro txt
      * Se não conseguir carregar, o estado é inicializado vazio
      */
-    public void carregaEstado(){
+    private void carregaEstado(){
         //imprime a janela
         this.view.menuTop();
         this.view.menuMidIO("Nome do ficheiro [0 - Default]:");
@@ -279,8 +605,10 @@ public class Control implements IControl{
 
             }
         }
-
-
+        //imprime o resultado
+        this.view.menuTop();
+        this.view.menuMidIO("Estado carregado com sucesso!");
+        this.view.menuBottom();
     }
 
 }

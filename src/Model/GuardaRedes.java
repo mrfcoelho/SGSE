@@ -1,6 +1,8 @@
 package Model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -9,50 +11,58 @@ import java.util.List;
  * @author grupo21
  * @version 1.0
  */
-public class GuardaRedes extends Jogador {
+
+public class GuardaRedes extends Jogador implements Serializable {
     //variaveis de instancia
     private int elasticidade;
 
-    /**
-     * Construtor vazio para a classe GuardaRedes.
-     */
-    public GuardaRedes() {
-        super();
-        this.elasticidade = 0;
-    }
+    //variaveis de classe
 
-    /**
-     * Construtor parametrizado para a classe GuardaRedes.
-     * @param nome nome do guardaredes.
-     * @param numeroCamisola numero da camisola do guardaredes.
-     * @param velocidade velocidade do guardaredes.
-     * @param resistencia resistencia do guardaredes.
-     * @param destreza destreza do guardaredes.
-     * @param impulsao impulsao do guardaredes.
-     * @param jogoCabeca jogo de cabeca do guardaredes.
-     * @param remate remate do guardaredes.
-     * @param passe passe do guardaredes.
-     * @param estado do guardaredes. (titular, suplente, entra, sai)
-     * @param elasticidade elasticidade do guardaredes.
-     * @param historial historial do guardaredes.
-     */
-    public GuardaRedes (String nome, int numeroCamisola, int velocidade, int resistencia, int destreza,
-                        int impulsao, int jogoCabeca, int remate, int passe, Estado estado,
-                        int elasticidade, List<String> historial) {
-        super(nome, numeroCamisola, velocidade, resistencia, destreza, impulsao, jogoCabeca,
-                remate, passe, estado, historial);
-        this.elasticidade = elasticidade;
-    }
+    //construtor
+        //vazio
+        /**
+         * Construtor vazio para a classe GuardaRedes.
+         */
+        public GuardaRedes() {
+            super();
+            this.elasticidade = 0;
+        }
 
-    /**
-     * Construtor copia para a classe guardaredes.
-     * @param newgr instancia de um guardaredes.
-     */
-    public GuardaRedes (GuardaRedes newgr) {
-        super (newgr);
-        this.elasticidade = newgr.getElasticidade();
-    }
+        //parametrico
+        /**
+         * Construtor parametrizado para a classe GuardaRedes.
+         * @param nome nome do guardaredes.
+         * @param numeroCamisola numero da camisola do guardaredes.
+         * @param velocidade velocidade do guardaredes.
+         * @param resistencia resistencia do guardaredes.
+         * @param destreza destreza do guardaredes.
+         * @param impulsao impulsao do guardaredes.
+         * @param jogoCabeca jogo de cabeca do guardaredes.
+         * @param remate remate do guardaredes.
+         * @param passe passe do guardaredes.
+         * @param estado do guardaredes. (titular, suplente, entra, sai)
+         * @param elasticidade elasticidade do guardaredes.
+         * @param historial historial do guardaredes.
+         */
+        public GuardaRedes (String nome, int numeroCamisola, int velocidade, int resistencia, int destreza,
+                            int impulsao, int jogoCabeca, int remate, int passe, Estado estado,
+                            int elasticidade, List<String> historial) {
+            super(nome, numeroCamisola, velocidade, resistencia, destreza, impulsao, jogoCabeca,
+                    remate, passe, estado, historial);
+            this.elasticidade = elasticidade;
+        }
 
+        //copia
+        /**
+         * Construtor copia para a classe guardaredes.
+         * @param newgr instancia de um guardaredes.
+         */
+        public GuardaRedes (GuardaRedes newgr) {
+            super (newgr);
+            this.elasticidade = newgr.getElasticidade();
+        }
+
+    //getters e setters
     /**
      * Metodo getter para a variavel de instancia elasticidade de um guardaredes.
      * @return int com a elasticidade de um guardaredes.
@@ -69,10 +79,8 @@ public class GuardaRedes extends Jogador {
         this.elasticidade = elasticidade;
     }
 
+    //metodos override
     @Override
-    /**
-     * Metodo equals para a classe GuardaRedes.
-     */
     public boolean equals(Object o){
         if(this == o) return true;
         if(o==null || this.getClass() != o.getClass()) return false;
@@ -81,36 +89,56 @@ public class GuardaRedes extends Jogador {
     }
 
     @Override
-    /**
-     * Metodo que permite clonar um GuardaRedes.
-     */
     public GuardaRedes clone () {
         return new GuardaRedes(this);
     }
 
     @Override
-    /**
-     * Metodo toString para a classe GuardaRedes.
-     */
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append ("Guarda-Redes:")
                 .append(super.toString())
+                .append(",")
                 .append(this.elasticidade);
         return sb.toString();
     }
 
-    //Metodos Abstract
+    @Override
+    public List<String> consultaJogador(){
+        List<String> res = super.consultaJogador();
+        Iterator<String> it = res.iterator();
+        boolean flag = true;
+        String s;
 
+        int indexToWrite=-1;
+
+        while(it.hasNext() && flag) {
+            indexToWrite++;
+            s = it.next();
+            if(s.contains("Habilidade: ")){
+                flag = false;
+                indexToWrite--;
+            }
+        }
+
+        res.add(indexToWrite,"Elasticidade: " + this.elasticidade);
+
+        return res;
+    }
+
+    //metodos abstract
+
+    //metodos especificos
     /**
      * Metodo que determina a habilidade de um guardaredes consoante os seus atributos.
      * @return int com a habilidade de um guardaredes.
      */
     public int habilidade(){
-        int resultado = 0;
-        return resultado;
+        return (int)(0.1*this.getVelocidade() + 0.1*this.getResistencia() + 0.2*this.getDestreza() +
+                0.2*this.getImpulsao() + 0.1*this.getPasse() + 0.3*this.getElasticidade());
     }
 
+    //metodos de classe
     /**
      * Metodo que faz o parse de um Guarda-Redes.
      * @param input String com um Guarda-Redes em modo de texto.

@@ -9,50 +9,56 @@ import java.util.List;
  * @author grupo21
  * @version 1.0
  */
+
 public class Avancado extends Jogador{
+    //variaveis de instancia
 
-    /**
-     * Construtor vazio para a classe Avancado.
-     */
-    public Avancado(){
-        super();
-    }
+    //variaveis de classe
 
-    /**
-     * Construtor parametrizado para a classe Avancado.
-     * @param nome nome do avancado.
-     * @param numeroCamisola numero da camisola do avancado.
-     * @param velocidade velocidade do avancado.
-     * @param resistencia resistencia do avancado.
-     * @param destreza destreza do avancado.
-     * @param impulsao impulsao do avancado.
-     * @param jogoCabeca jogo de cabeca do avancado.
-     * @param remate remate do avancado.
-     * @param passe passe do avancado.
-     * @param estado estado de um avancado. (titular, suplente, entra ou sai)
-     * @param historial lista como nome das equipas onde o avancado jogou.
-     */
-    public Avancado(String nome, int numeroCamisola, int velocidade, int resistencia, int destreza,
-                    int impulsao, int jogoCabeca, int remate, int passe, Estado estado,
-                    List<String> historial){
-        super(nome, numeroCamisola, velocidade, resistencia, destreza, impulsao, jogoCabeca,
-        remate, passe, estado, historial);
-    }
+    //construtor
+        //vazio
+        /**
+         * Construtor vazio para a classe Avancado.
+         */
+        public Avancado(){
+            super();
+        }
 
-    /**
-     * Construtor copia para a classe Avancado.
-     * @param newAvancado um avancado.
-     */
-    public Avancado(Avancado newAvancado){
-        super(newAvancado);
-    }
+        //parametrico
+        /**
+         * Construtor parametrizado para a classe Avancado.
+         * @param nome nome do avancado.
+         * @param numeroCamisola numero da camisola do avancado.
+         * @param velocidade velocidade do avancado.
+         * @param resistencia resistencia do avancado.
+         * @param destreza destreza do avancado.
+         * @param impulsao impulsao do avancado.
+         * @param jogoCabeca jogo de cabeca do avancado.
+         * @param remate remate do avancado.
+         * @param passe passe do avancado.
+         * @param estado estado de um avancado. (titular, suplente, entra ou sai)
+         * @param historial lista como nome das equipas onde o avancado jogou.
+         */
+        public Avancado(String nome, int numeroCamisola, int velocidade, int resistencia, int destreza,
+                        int impulsao, int jogoCabeca, int remate, int passe, Estado estado,
+                        List<String> historial){
+            super(nome, numeroCamisola, velocidade, resistencia, destreza, impulsao, jogoCabeca,
+                    remate, passe, estado, historial);
+        }
+
+        //copia
+        /**
+         * Construtor copia para a classe Avancado.
+         * @param newAvancado um avancado.
+         */
+        public Avancado(Avancado newAvancado){
+            super(newAvancado);
+        }
+
+    //getters e setters
 
     //metodos override
-
     @Override
-    /**
-     * Metodo equals para a classe Avancado.
-     */
     public boolean equals(Object o){
         if(this == o) return true;
         if(o==null || this.getClass() != o.getClass()) return false;
@@ -61,17 +67,11 @@ public class Avancado extends Jogador{
     }
 
     @Override
-    /**
-     * Metodo que permite clonar um avancado.
-     */
     public Avancado clone(){
         return new Avancado(this);
     }
 
     @Override
-    /**
-     * Metodo toString para a classe Avancado.
-     */
     public String toString() {
 
         StringBuilder sb = new StringBuilder();
@@ -82,6 +82,7 @@ public class Avancado extends Jogador{
 
     //metodos abstract
 
+    //metodos especificos
     /**
      * Metodo que determina a habilidade de um avancado.
      * A habilidade e calculada através dos seus atributos.
@@ -93,6 +94,7 @@ public class Avancado extends Jogador{
                 0.05*this.getPasse());
     }
 
+    //metodos de classe
     /**
      * Metodo que faz o parse de um avancado.
      * @param input String com um avancado em modo de texto.
@@ -112,5 +114,4 @@ public class Avancado extends Jogador{
                 Estado.SUPLENTE,
                 new ArrayList<>());
     }
-
 }

@@ -41,6 +41,7 @@ public class Parser {
                     if (ultima == null)
                         throw new LinhaIncorretaException(); //we need to insert the player into the team
                     ultima.insereJogador(j.clone()); //if no team was parsed previously, file is not well-formed
+                    j.atualizaHistorial(ultima.getNome());
                     break;
                 case "Defesa":
                     j = Defesa.parse(linhaPartida[1]);
@@ -48,6 +49,7 @@ public class Parser {
                     if (ultima == null)
                         throw new LinhaIncorretaException(); //we need to insert the player into the team
                     ultima.insereJogador(j.clone()); //if no team was parsed previously, file is not well-formed
+                    j.atualizaHistorial(ultima.getNome());
                     break;
                 case "Medio":
                     j = Medio.parse(linhaPartida[1]);
@@ -55,6 +57,7 @@ public class Parser {
                     if (ultima == null)
                         throw new LinhaIncorretaException(); //we need to insert the player into the team
                     ultima.insereJogador(j.clone()); //if no team was parsed previously, file is not well-formed
+                    j.atualizaHistorial(ultima.getNome());
                     break;
                 case "Lateral":
                     j = Lateral.parse(linhaPartida[1]);
@@ -62,6 +65,7 @@ public class Parser {
                     if (ultima == null)
                         throw new LinhaIncorretaException(); //we need to insert the player into the team
                     ultima.insereJogador(j.clone()); //if no team was parsed previously, file is not well-formed
+                    j.atualizaHistorial(ultima.getNome());
                     break;
                 case "Avancado":
                     j = Avancado.parse(linhaPartida[1]);
@@ -69,20 +73,18 @@ public class Parser {
                     if (ultima == null)
                         throw new LinhaIncorretaException(); //we need to insert the player into the team
                     ultima.insereJogador(j.clone()); //if no team was parsed previously, file is not well-formed
+                    j.atualizaHistorial(ultima.getNome());
                     break;
                 case "Jogo":
-                    //?System.out.println(linhaPartida[1]);
                     Jogo jo = Jogo.parse(linhaPartida[1]);
-
                     jogos.add(jo);
-                    //?System.out.println(jo);
-
                     break;
                 default:
                     throw new LinhaIncorretaException();
             }
             model.setJogadores(jogadores);
             model.setEquipas(equipas);
+            model.setJogos(jogos);
         }
 
         //debug

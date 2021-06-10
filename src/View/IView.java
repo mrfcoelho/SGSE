@@ -2,6 +2,12 @@ package View;
 
 import java.util.List;
 
+/**
+ * Interface para a view.
+ * @author grupo21
+ * @version 1.0
+ */
+
 public interface IView {
     //metodos abstratos
 
@@ -19,9 +25,19 @@ public interface IView {
     void menuBottom();
 
     /**
+     * imprime na tela a parte inferior do menu com um pedido de input do utilizador
+     */
+    void menuBotIO(String io);
+
+    /**
      * imprime na tela a parte central do menu com um pedido de input do utilizador
      */
     void menuMidIO(String io);
+
+    /**
+     * imprime na tela a parte central do menu com um pedido de input do utilizador
+     */
+    void menuMidIO(List<String> io);
 
     /**
      * Menu Principal
@@ -33,11 +49,5 @@ public interface IView {
      */
     void menuRegistarNovoJogador();
 
-    /**
-     * Menu para consulta de um jogador
-     */
-    void menuConsultarJogador(List<String> resultado);
-
     //metodos concretos de class (static methods)
-
 }

@@ -1,5 +1,6 @@
 package Model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,9 +9,10 @@ import java.util.List;
  * @author grupo21
  * @version 1.0
  */
-public abstract class Jogador {
+
+public abstract class Jogador implements Serializable {
     //variaveis de instancia
-    private int id;
+    private final int id;
     private String nome;
     private int numeroCamisola;
     private int velocidade;
@@ -26,10 +28,84 @@ public abstract class Jogador {
     //variaveis de class
     private static int numJogadores; // numero de jogadores qe ja foram criados.
 
-    public static enum Estado{
+    public enum Estado{
         SUPLENTE, TITULAR, SAINDO, ENTRANDO
     }
 
+    //construtor
+        //vazio
+        /**
+         * Construtor vazio para a classe Jogador.
+         */
+        public Jogador() {
+            numJogadores++;
+            this.id = numJogadores;
+            this.nome = "";
+            this.numeroCamisola = 0;
+            this.velocidade = 0;
+            this.resistencia = 0;
+            this.destreza = 0;
+            this.impulsao = 0;
+            this.jogoCabeca = 0;
+            this.remate = 0;
+            this.passe = 0;
+            this.estado = Estado.SUPLENTE;
+            this.historial = new ArrayList<>();
+        }
+        //parametrico
+        /**
+         * Construtor parametrizado para a classe Jogador.
+         * @param nome nome de um jogador.
+         * @param numeroCamisola numero da camisola de um jogador.
+         * @param velocidade velocidade de um jogador.
+         * @param resistencia resistencia de um jogador.
+         * @param destreza destreza de um jogador.
+         * @param impulsao impulsao de um jogador.
+         * @param jogoCabeca jogo de cabeca de um jogador.
+         * @param remate remate de um jogador.
+         * @param passe passe de um jogador.
+         * @param estado de um jogador.
+         * @param historial nome das equipas onde o jogador jogou.
+         */
+        public Jogador(String nome, int numeroCamisola, int velocidade, int resistencia, int destreza,
+                       int impulsao, int jogoCabeca, int remate, int passe, Estado estado,
+                       List<String> historial) {
+            numJogadores++;
+            this.id = numJogadores;
+            this.nome = nome;
+            this.numeroCamisola = numeroCamisola;
+            this.velocidade = velocidade;
+            this.resistencia = resistencia;
+            this.destreza = destreza;
+            this.impulsao = impulsao;
+            this.jogoCabeca = jogoCabeca;
+            this.remate = remate;
+            this.passe = passe;
+            this.estado = estado;
+            this.historial = new ArrayList<>(historial);
+        }
+
+        //copia
+        /**
+         * Construtor copia para a classe Jogador.
+         * @param jogador instancia da classe Jogador.
+         */
+        public Jogador(Jogador jogador) {
+            this.id = jogador.getId();
+            this.nome = jogador.getNome();
+            this.numeroCamisola = jogador.getNumeroCamisola();
+            this.velocidade = jogador.getVelocidade();
+            this.resistencia = jogador.getResistencia();
+            this.destreza = jogador.getDestreza();
+            this.impulsao = jogador.getImpulsao();
+            this.jogoCabeca = jogador.getJogoCabeca();
+            this.remate = jogador.getRemate();
+            this.passe = jogador.getPasse();
+            this.estado = jogador.getEstado();
+            this.historial = jogador.getHistorial();
+        }
+
+    //getters e setters
     /**
      * Metodo getter para a variavel numJogadores.
      * @return int com o total de jogadores que ja foram criados.
@@ -54,6 +130,10 @@ public abstract class Jogador {
         return nome;
     }
 
+    /**
+     * Metodo getter para a variavel de instancia numeroCamisola da classe Jogador.
+     * @return int com o numeroCamisola de um jogador.
+     */
     public int getNumeroCamisola() {
         return numeroCamisola;
     }
@@ -62,10 +142,7 @@ public abstract class Jogador {
      * Metodo getter para a variavel de instancia velocidade da classe Jogador.
      * @return int com a velocidade de um jogador.
      */
-    public int getVelocidade() {
-
-        return velocidade;
-    }
+    public int getVelocidade() { return velocidade; }
 
     /**
      * Metodo getter para a variavel de instancia resistencia da classe Jogador.
@@ -117,7 +194,7 @@ public abstract class Jogador {
 
     /**
      * Metodo getter para a variavel de instancia titular da classe Jogador.
-     * @return booleano com o valor de titular de um jogador.
+     * @return Estado de um jogador.
      */
     public Estado getEstado() {
         return estado;
@@ -127,10 +204,7 @@ public abstract class Jogador {
      * Metodo getter para a variavel de instancia historial para a classe Jogador.
      * @return Lista com as equipas em que o jogador jogou.
      */
-    public List<String> getHistorial() {
-
-        return new ArrayList<>(this.historial);
-    }
+    public List<String> getHistorial() { return new ArrayList<>(this.historial); }
 
     /**
      * Metodo setter para a variavel de instancia nome da classe Jogador.
@@ -164,9 +238,7 @@ public abstract class Jogador {
      * Metodo setter para a variavel de instancia destreza para a classe Joagdor.
      * @param destreza destreza de um jogador.
      */
-    public void setDestreza(int destreza) {
-        this.destreza = destreza;
-    }
+    public void setDestreza(int destreza) { this.destreza = destreza; }
 
     /**
      * Metodo setter para a variavel de instancia impulsao da classe Jogador.
@@ -216,78 +288,7 @@ public abstract class Jogador {
         this.historial = new ArrayList<>(historial);
     }
 
-    /**
-     * Construtor vazio para a classe Jogador.
-     */
-    public Jogador() {
-        numJogadores++;
-        this.id = numJogadores;
-        this.nome = "";
-        this.numeroCamisola = 0;
-        this.velocidade = 0;
-        this.resistencia = 0;
-        this.destreza = 0;
-        this.impulsao = 0;
-        this.jogoCabeca = 0;
-        this.remate = 0;
-        this.passe = 0;
-        this.estado = Estado.SUPLENTE;
-        this.historial = new ArrayList<>();
-    }
-
-    /**
-     * Construtor parametrizado para a classe Jogador.
-     * @param nome nome de um jogador.
-     * @param numeroCamisola numero da camisola de um jogador.
-     * @param velocidade velocidade de um jogador.
-     * @param resistencia resistencia de um jogador.
-     * @param destreza destreza de um jogador.
-     * @param impulsao impulsao de um jogador.
-     * @param jogoCabeca jogo de cabeca de um jogador.
-     * @param remate remate de um jogador.
-     * @param passe passe de um jogador.
-     * @param estado de um jogador.
-     * @param historial nome das equipas onde o jogador jogou.
-     */
-    public Jogador(String nome, int numeroCamisola, int velocidade, int resistencia, int destreza,
-                   int impulsao, int jogoCabeca, int remate, int passe, Estado estado,
-                   List<String> historial) {
-        numJogadores++;
-        this.id = numJogadores;
-        this.nome = nome;
-        this.numeroCamisola = numeroCamisola;
-        this.velocidade = velocidade;
-        this.resistencia = resistencia;
-        this.destreza = destreza;
-        this.impulsao = impulsao;
-        this.jogoCabeca = jogoCabeca;
-        this.remate = remate;
-        this.passe = passe;
-        this.estado = estado;
-        this.historial = new ArrayList<>(historial);
-    }
-
-    /**
-     * Construtor copia para a classe Jogador.
-     * @param jogador instancia da classe Jogador.
-     */
-    public Jogador(Jogador jogador) {
-        this.id = jogador.getId();
-        this.nome = jogador.getNome();
-        this.numeroCamisola = jogador.getNumeroCamisola();
-        this.velocidade = jogador.getVelocidade();
-        this.resistencia = jogador.getResistencia();
-        this.destreza = jogador.getDestreza();
-        this.impulsao = jogador.getImpulsao();
-        this.jogoCabeca = jogador.getJogoCabeca();
-        this.remate = jogador.getRemate();
-        this.passe = jogador.getPasse();
-        this.estado = jogador.getEstado();
-        this.historial = jogador.getHistorial();
-    }
-
     //metodos override
-
     @Override
     /**
      * Metodo equals para a classe Jogador.
@@ -296,8 +297,7 @@ public abstract class Jogador {
         if (this == o) return true;
         if (o == null || this.getClass() != o.getClass()) return false;
         Jogador resultado = (Jogador) o;
-        return this.id == resultado.getId() &&
-                this.nome.equals(resultado.getNome()) &&
+        return  this.nome.equals(resultado.getNome()) &&
                 this.numeroCamisola == resultado.getNumeroCamisola() &&
                 this.velocidade == resultado.getVelocidade() &&
                 this.resistencia == resultado.getResistencia() &&
@@ -324,10 +324,11 @@ public abstract class Jogador {
                 .append(this.impulsao).append(",")
                 .append(this.jogoCabeca).append(",")
                 .append(this.remate).append(",")
-                .append(this.passe).append(",");
+                .append(this.passe);
         return sb.toString();
     }
 
+    //metodos abstract
     /**
      * Metodo abstracto que determina a habilidade de um jogador consoante os seus atributos.
      * @return double com a habilidade de um jogador.
@@ -336,6 +337,32 @@ public abstract class Jogador {
 
     public abstract Jogador clone();
 
+    //metodos especificos
+    public void atualizaHistorial(String nome){ this.historial.add(nome); }
+
+    public List<String> consultaJogador(){
+        List <String> result = new ArrayList<> ();
+
+        result.add("Posição: " + this.getClass().getSimpleName());
+        result.add("");
+        result.add("Nome: " + this.nome);
+        result.add("Numero de camisola: " + this.numeroCamisola);
+        result.add("Velocidade: " + this.velocidade);
+        result.add("Destreza: " + this.destreza);
+        result.add("Impulsão: " + this.impulsao);
+        result.add("Jogo de cabeça: " + this.jogoCabeca);
+        result.add("Remate: " + this.remate);
+        result.add("Passe: " + this.passe);
+        result.add("");
+        result.add("Habilidade: " + this.habilidade());
+        result.add("");
+        result.add("Historial:");
+        result.addAll(this.historial);
+
+        return result;
+    }
+
+    //metodos de classe
     public static Jogador parse(String input) {
         return null;
     }

@@ -40,6 +40,8 @@ public class SGSE {
 
     //metodos especificos
 
+    //metodos de classe
+
 
 
 //estrutura tipo de uma interface  a adotar!

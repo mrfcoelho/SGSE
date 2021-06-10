@@ -9,50 +9,56 @@ import java.util.List;
  * @author grupo21
  * @version 1.0
  */
+
 public class Defesa extends Jogador{
+    //variaveis de instancia
 
-    /**
-     * Construtor vazio para a classe Defesa.
-     */
-    public Defesa() {
-        super();
-    }
+    //variaveis de classe
 
-    /**
-     * Construtor parametrizado para a classe Defesa.
-     * @param nome nome de um defesa.
-     * @param numeroCamisola numero da camisola de um defesa.
-     * @param velocidade velocidade de um defesa.
-     * @param resistencia resistencia de um defesa.
-     * @param destreza destreza de um defesa.
-     * @param impulsao impulsao de um defesa.
-     * @param jogoCabeca jogo de cabeca de um defesa.
-     * @param remate remate de um defesa.
-     * @param passe passe de um defesa.
-     * @param estado estado de um defesa. (titular, suplente, entra ou sai)
-     * @param historial nome das equipas onde o defesa jogou.
-     */
-    public Defesa (String nome, int numeroCamisola, int velocidade, int resistencia, int destreza,
-                   int impulsao, int jogoCabeca, int remate, int passe, Estado estado,
-                   List<String> historial) {
-        super(nome, numeroCamisola, velocidade, resistencia, destreza, impulsao, jogoCabeca,
-                remate, passe, estado, historial);
-    }
+    //construtor
+        //vazio
+        /**
+         * Construtor vazio para a classe Defesa.
+         */
+        public Defesa() {
+            super();
+        }
 
-    /**
-     * Construtor copia para a classe Defesa.
-     * @param newDefesa instancia da classe Defesa.
-     */
-    public Defesa (Defesa newDefesa) {
-        super (newDefesa);
-    }
+        //parametrico
+        /**
+         * Construtor parametrizado para a classe Defesa.
+         * @param nome nome de um defesa.
+         * @param numeroCamisola numero da camisola de um defesa.
+         * @param velocidade velocidade de um defesa.
+         * @param resistencia resistencia de um defesa.
+         * @param destreza destreza de um defesa.
+         * @param impulsao impulsao de um defesa.
+         * @param jogoCabeca jogo de cabeca de um defesa.
+         * @param remate remate de um defesa.
+         * @param passe passe de um defesa.
+         * @param estado estado de um defesa. (titular, suplente, entra ou sai)
+         * @param historial nome das equipas onde o defesa jogou.
+         */
+        public Defesa (String nome, int numeroCamisola, int velocidade, int resistencia, int destreza,
+                       int impulsao, int jogoCabeca, int remate, int passe, Estado estado,
+                       List<String> historial) {
+            super(nome, numeroCamisola, velocidade, resistencia, destreza, impulsao, jogoCabeca,
+                    remate, passe, estado, historial);
+        }
 
-   //Metodos override
+        //copia
+        /**
+         * Construtor copia para a classe Defesa.
+         * @param newDefesa instancia da classe Defesa.
+         */
+        public Defesa (Defesa newDefesa) {
+            super (newDefesa);
+        }
 
+    //getters e setters
+
+    //metodos override
     @Override
-    /**
-     * Metodo equals para a classe Defesa.
-     */
     public boolean equals(Object o){
         if(this == o) return true;
         if(o==null || this.getClass() != o.getClass()) return false;
@@ -61,17 +67,11 @@ public class Defesa extends Jogador{
     }
 
     @Override
-    /**
-     * Metodo que permite clonar um defesa.
-     */
     public Defesa clone () {
         return new Defesa(this);
     }
 
     @Override
-    /**
-     * Metodo toString para a classe Defesa.
-     */
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append ("Defesa:")
@@ -81,15 +81,18 @@ public class Defesa extends Jogador{
 
     //metodos abstract
 
+    //metodos especificos
     /**
      * Metodo que determina a habilidade de um jogador, consoante os seus atributos.
      * @return int com o valor da habilidade de um defesa.
      */
     public int habilidade(){
-        int resultado = 0;
-        return resultado;
+        return (int)(0.2*this.getVelocidade() + 0.2*this.getResistencia() + 0.05*this.getDestreza() +
+                0.2*this.getImpulsao() + 0.2*this.getJogoCabeca() + 0.05*this.getRemate() +
+                0.1*this.getPasse());
     }
 
+    //metodos de classe
     /**
      * Metodo que faz o parse de um defesa.
      * @param input String com um defesa em modo de texto.

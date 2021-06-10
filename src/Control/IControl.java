@@ -3,31 +3,34 @@ package Control;
 import Model.IModel;
 import View.IView;
 
+/**
+ * Interface para o control.
+ * @author grupo21
+ * @version 1.0
+ */
+
 public interface IControl {
     //metodos abstratos
 
-    //constantes ffff
+    //constantes
 
     //metodos concretos (default methods)
+    /**
+     * Atribui o model
+     * @param model a atribuir
+     */
     void setModel(IModel model);
 
+    /**
+     * Atribui a view
+     * @param view a atribuir
+     */
     void setView(IView view);
 
     /**
-     * Inicia o programa
+     * Inicia o control
      */
     void start();
-
-    /**
-     * Guarda o estado atual num ficheiro txt
-     */
-    void salvaEstado();
-
-    /**
-     * Carrega estado de um ficheiro txt
-     * Se não conseguir carregar, o estado é inicializado vazio
-     */
-    void carregaEstado();
 
     //metodos concretos de class (static methods)
 }
