@@ -117,13 +117,27 @@ public class Control implements IControl{
             "Impulsão: ","Cabeça: ","Remate: ","Passe: "};
         ArrayList<String> dados = new ArrayList<>();
         String buffer;
+        int v=0;
+        boolean ok=true;
         //imprime a janela
         for(String s : list){
+            while(ok) {
             this.view.menuTop();
             this.view.menuMidIO(s);
             this.view.menuBottom();
             buffer = Input.lerString();
+            v=Integer.parseInt(buffer);
+            if(v>0 && v<100) {
             dados.add(buffer);
+            ok=false;
+            }
+            else {
+                this.view.menuTop();
+                this.view.menuMidIO("O atributo do jogador de ser maior 0 e menor que 100");
+                this.view.menuBottom();
+            }
+            }
+            ok=true;
         }
 
         //dados do novo jogador a ser criado (vindos do registo)
@@ -319,6 +333,7 @@ public class Control implements IControl{
         int equipaForaSubstituicoes;
         double equipaForaHabilidade = 0;
 
+        boolean ok;
         int scoreCasa = 0;
         int scoreFora = 0;
         String data ;
@@ -392,11 +407,20 @@ public class Control implements IControl{
                     }
                 }
             }
-
+            while(ok){
             this.view.menuTop();
             this.view.menuMidIO(temp);
             this.view.menuBotIO("Total de substituições a fazer: ");
             equipaCasaSubstituicoes = Input.lerInt();
+            if(equipaCasaSubstituicoes>3) {
+                this.view.menuTop();
+                this.view.menuMidIO("Não é possivel realizar mais de 3 substituições");
+                this.view.menuBottom();
+            } 
+            else{
+                ok=false;
+            }
+            }
 
             flag = true;
             aux = 1;
@@ -425,10 +449,21 @@ public class Control implements IControl{
             }
 
             //equipaFora
+            ok=true;
+            while(ok) {
             this.view.menuTop();
             this.view.menuMidIO("Indique o nome da Equipa da fora: ");
             this.view.menuBottom();
             equipaForaNome = Input.lerString();
+                if(equipaForaNome.equals(equipaCasaNome)) {
+                    this.view.menuTop();
+                    this.view.menuMidIO("Não é possivel realizar um jogos com a mesma equipa");
+                    this.view.menuBottom(); 
+                }
+                else{
+                    ok=false;
+                }
+            }
 
             errors = "";
             flag=true;
@@ -487,12 +522,21 @@ public class Control implements IControl{
                         }
                     }
                 }
-
+                ok=true;
+                while(ok){
                 this.view.menuTop();
                 this.view.menuMidIO(temp);
                 this.view.menuBotIO("Total de substituições a fazer: ");
                 equipaForaSubstituicoes = Input.lerInt();
-
+                if(equipaForaSubstituicoes>3) {
+                    this.view.menuTop();
+                    this.view.menuMidIO("Não é possivel realizar mais de 3 substituições");
+                    this.view.menuBottom();
+                    } 
+                    else{
+                        ok=false;
+                    }
+                }
                 flag = true;
                 aux = 1;
                 errors = "Número dos jogadores [out->in]:";
@@ -525,10 +569,21 @@ public class Control implements IControl{
                 if(equipaCasaHabilidade*0.6>equipaForaHabilidade*0.4){
                     scoreCasa = win;
                     scoreFora = loose;
+                    StringBuilder mens = new StringBuilder();
+                    mens.append(equipaCasaNome).append(":").append(scoreCasa).append("-").append(scoreFora).append(":").append(equipaForaNome);
+                    this.view.menuTop();
+                    this.view.menuMidIO(mens.toString());
+                    this.view.menuBottom();
                 }else{
                     scoreCasa = loose;
                     scoreFora = win;
+                    StringBuilder mens = new StringBuilder();
+                    mens.append(equipaCasaNome).append(":").append(scoreCasa).append("-").append(scoreFora).append(":").append(equipaForaNome);
+                    this.view.menuTop();
+                    this.view.menuMidIO(mens.toString());
+                    this.view.menuBottom();
                 }
+                
 
                 //adicionar novo jogo ao model
                 this.model.adicionaJogo(new Jogo(equipaCasaNome, equipaForaNome, scoreCasa, scoreFora, data,
