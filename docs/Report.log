@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.6.10)  10 JUN 2021 23:44
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2021.6.10)  11 JUN 2021 11:12
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -167,14 +167,7 @@ File: l3backend-pdfmode.def 2020-02-03 L3 backend support: PDF mode
 \l__kernel_color_stack_int=\count184
 \l__pdf_internal_box=\box45
 )
-(./Report.aux
-
-Package babel Warning: Unknown language `portuguese'. Very likely you
-(babel)                requested it in a previous run. Expect some
-(babel)                wrong results in this run, which should vanish
-(babel)                in the next one. Reported on input line 5.
-
-)
+(./Report.aux)
 \openout1 = `Report.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 39.
@@ -263,11 +256,11 @@ Package pdftex.def Info: figs/Daniel.jpeg  used on input line 47.
 (pdftex.def)             Requested size: 136.57462pt x 136.57556pt.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <10.95> on input line 49.
-<figs/Mario.jpeg, id=2, 88.33pt x 87.32625pt>
+<figs/Mario.jpeg, id=2, 43.362pt x 43.362pt>
 File: figs/Mario.jpeg Graphic file (type jpg)
 <use figs/Mario.jpeg>
 Package pdftex.def Info: figs/Mario.jpeg  used on input line 52.
-(pdftex.def)             Requested size: 136.57462pt x 135.02516pt.
+(pdftex.def)             Requested size: 136.57462pt x 136.58237pt.
 <figs/MC.jpeg, id=3, 176.66pt x 174.6525pt>
 File: figs/MC.jpeg Graphic file (type jpg)
 <use figs/MC.jpeg>
@@ -289,6 +282,9 @@ Make it at least 13.59999pt.
 We now make it that large for the rest of the document.
 This may cause the page layout to be inconsistent, however.
 
+
+LaTeX Warning: Reference `LastPage' on page 2 undefined on input line 134.
+
 [2]
 Overfull \hbox (6.96945pt too wide) in paragraph at lines 140--141
 []$[]$\T1/cmr/m/n/10.95 : cuja implementação só faz sentido no contexto de inst
@@ -300,6 +296,9 @@ Overfull \hbox (2.94208pt too wide) in paragraph at lines 151--152
 []\T1/cmr/m/n/10.95 Na Tabela 1[] apresentam-se os pesos relativos que foram co
 nsiderados para calcular a habilidade
  []
+
+
+LaTeX Warning: Reference `LastPage' on page 3 undefined on input line 176.
 
 [3]
 Overfull \hbox (6.9841pt too wide) in paragraph at lines 190--191
@@ -313,33 +312,45 @@ Overfull \hbox (1.88832pt too wide) in paragraph at lines 202--203
 os que tiveram de ser arbitrados.
  []
 
+
+LaTeX Warning: Reference `LastPage' on page 4 undefined on input line 208.
+
 [4]
-<figs/Diagrama.pdf, id=25, 1126.2075pt x 1463.4675pt>
+<figs/Diagrama.pdf, id=26, 1126.2075pt x 1463.4675pt>
 File: figs/Diagrama.pdf Graphic file (type pdf)
 <use figs/Diagrama.pdf>
 Package pdftex.def Info: figs/Diagrama.pdf  used on input line 214.
 (pdftex.def)             Requested size: 432.65468pt x 562.2286pt.
- [5 <./figs/Diagrama.pdf>] (./Report.aux) ) 
+
+
+LaTeX Warning: Reference `LastPage' on page 5 undefined on input line 219.
+
+[5 <./figs/Diagrama.pdf>] (./Report.aux)
+
+LaTeX Warning: There were undefined references.
+
+ ) 
 Here is how much of TeX's memory you used:
- 3850 strings out of 483183
- 57815 string characters out of 5966292
- 308690 words of memory out of 5000000
- 18845 multiletter control sequences out of 15000+600000
- 541640 words of font info for 44 fonts, out of 8000000 for 9000
+ 3848 strings out of 483183
+ 57768 string characters out of 5966292
+ 308687 words of memory out of 5000000
+ 18842 multiletter control sequences out of 15000+600000
+ 542423 words of font info for 45 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  41i,10n,45p,510b,375s stack positions out of 5000i,500n,10000p,200000b,80000s
- </home/daniel/.texlive2019/texmf-va
-r/fonts/pk/ljfour/jknappen/ec/ecbx1200.600pk> </home/daniel/.texlive2019/texmf-
-var/fonts/pk/ljfour/jknappen/ec/tcrm1095.600pk> </home/daniel/.texlive2019/texm
-f-var/fonts/pk/ljfour/jknappen/ec/ecti1095.600pk> </home/daniel/.texlive2019/te
-xmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1440.600pk> </home/daniel/.texlive2019/
-texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1095.600pk> </home/daniel/.texlive201
-9/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1200.600pk> </home/daniel/.texlive2
-019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1728.600pk>
-Output written on Report.pdf (5 pages, 232531 bytes).
+ </home/daniel/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1095.60
+0pk> </home/daniel/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1200.
+600pk> </home/daniel/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm109
+5.600pk> </home/daniel/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1
+095.600pk> </home/daniel/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecb
+x1440.600pk> </home/daniel/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/e
+crm1095.600pk> </home/daniel/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec
+/ecrm1200.600pk> </home/daniel/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/
+ec/ecrm1728.600pk>
+Output written on Report.pdf (5 pages, 246657 bytes).
 PDF statistics:
- 305 PDF objects out of 1000 (max. 8388607)
- 58 compressed objects within 1 object stream
+ 313 PDF objects out of 1000 (max. 8388607)
+ 62 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  21 words of extra memory for PDF output out of 10000 (max. 10000000)
 
